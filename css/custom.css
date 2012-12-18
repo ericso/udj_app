@@ -1,0 +1,66 @@
+/* Custom Child Style Sheet for Bootstrap */
+/* Created by @theawkwardduck */
+
+
+/* Changes style of mobile hero unit */
+.mobile-hero-unit {
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 30px;
+  color: inherit;
+  background-color: #eeeeee;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+.mobile-hero-unit h1 {
+  margin-bottom: 0;
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: inherit;
+}
+
+.mobile-hero-unit li {
+  line-height: 30px;
+}
+
+.mobile-hero-unit h2 {
+  margin-bottom: 0;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: inherit;
+}
+
+.mobile-hero-unit h3 {
+  margin-bottom: 0;
+  font-size: 25px;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: inherit;
+}
+
+/* Styles title/artist vertically against the image in results page. */
+.results-info {
+	padding-left:80px;
+	padding-top:6px;
+	}
+	
+/* Moves the track/artist <h5> up in the table. */
+table h5 {
+	margin-top:0px;
+	}
+	
+/* Makes mobile title blue */
+.navbar .brand:hover {
+	color:#777777;
+	text-decoration: none;
+	}
+.navbar .brand {
+	color:blue;
+	text-decoration: none;
+	}
