@@ -21,6 +21,8 @@
 	
 	<!-- App code -->
 	<script src="app/js/gui.js"></script>
+	<script src="app/js/search.js"></script>
+	<script src="app/js/songs.js"></script>
 
 	<!-- HTML5 shim for IE backwards compatibility -->
 	<!--[if lt IE 9]>
@@ -133,33 +135,15 @@
 	<div id="search_tab_div" class="row-fluid span12" style="display: none;">
 		<aside class="row-fluid span12">
 			<h4>Search for a track:</h4>
-			<form class="form-search form-centered">
-				<input id="artistTitle" type="text" class="input-medium search-query"></input>
-				<a href="search.html" class="btn btn-primary">Search</a>
-			</form>
+			<div class="form-search form-centered">
+				<input id="song_search_input" type="text" class="input-medium"></input>
+				<button class="btn btn-primary" id="song_search_button">Search</button>
+			</div>
 		</aside>
+		
 		<div class="row-fluid span12">
-			<h3>Search Results<small><span> </span>3 found</small></h3>
-		</div>
-		<div class="well">
-			<a class="pull-left" href="#"><img class="thumbnail" src="assets/img/holder.png"></a><button type="submit" class="btn btn-primary pull-right">Request</button>
-			<div class="results-info">
-				<h4>Title<span> </span><small>Artist</small></h4>
-				<p>Album Title<span> </span><small>date</small></p>
-			</div>
-		</div>
-		<div class="well">
-			<a class="pull-left" href="#"><img class="thumbnail" src="assets/img/holder.png"></a><button type="submit" class="btn btn-primary pull-right">Request</button>
-			<div class="results-info">
-				<h4>Title<span> </span><small>Artist</small></h4>
-				<p>Album Title<span> </span><small>date</small></p>
-			</div>
-		</div>
-		<div class="well">
-			<a class="pull-left" href="#"><img class="thumbnail" src="assets/img/holder.png"></a><button type="submit" class="btn btn-primary pull-right">Request</button>
-			<div class="results-info">
-				<h4>Title<span> </span><small>Artist</small></h4>
-				<p>Album Title<span> </span><small>date</small></p>
+			<h3>Search Results<small><span id="number_songs_found"> </span> songs found</small></h3>
+			<div id="search_results_list">
 			</div>
 		</div>
 	</div>
