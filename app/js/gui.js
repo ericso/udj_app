@@ -1,0 +1,57 @@
+function setupApp() {
+	/*** Switching Tabs ***/
+	$('#index_tab').click( function() {
+		// Find the currently active tab
+		var activeTab = $('#nav_bar .active');
+		
+		// Switch the tabs
+		switchTab(activeTab.attr('id'), 'index_tab');
+
+	});
+	$('#queue_tab').click( function() {
+		// Find the currently active tab
+		var activeTab = $('#nav_bar .active');
+		
+		// Switch the tabs
+		switchTab(activeTab.attr('id'), 'queue_tab');
+
+	});
+	$('#search_tab').click( function() {
+		// Find the currently active tab
+		var activeTab = $('#nav_bar .active');
+		
+		// Switch the tabs
+		switchTab(activeTab.attr('id'), 'search_tab');
+
+	});
+	$('#help_tab').click( function() {
+		// Find the currently active tab
+		var activeTab = $('#nav_bar .active');
+		
+		// Switch the tabs
+		switchTab(activeTab.attr('id'), 'help_tab');
+
+	});
+}
+
+function switchTab(fromTab, toTab) {
+	if (!$('#' + toTab).hasClass('disabled') && !$("#" + toTab).hasClass('active')) {
+		// Hide the currently active tab
+		$('#' + fromTab + "_div").slideUp();
+		// Remove the active state from the tab
+		$('#' + fromTab).removeClass('active');
+
+		//alert("about to show div");
+
+		// Show the new tab
+		$('#' + toTab + "_div").slideDown();
+		// Add active state to the tab
+		$('#' + toTab).addClass('active');
+	}
+}
+
+// /*** Generate Bootstrap alert box ***/
+// function newAlert(type, message) {
+// 	$("#alert-area").append($("<div class='alert " + type + " fade in' data-alert><button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" + message + "</div>"));
+//     	$("#alert-area .alert").delay(3000).fadeOut("slow", function () { $(this).remove(); });
+// }
