@@ -9,11 +9,16 @@ function updateSongList(foundSongs) {
 }
 
 function addSongToQueue(songId) {
-	// Find the song to be added
+	// Add song to the queue by id
 	var songToAdd = findSongById(songId);
 
-	// Push the song onto the queue array
-	queueSongs.push(songToAdd);
+	// Push the song onto the queue array if it isn't already there
+	if (findSongInQueue(songId)) {
+		upVote(songId)
+	} else {
+		queueSongs.push(findSongById(songId));
+		upVote(songId);
+	}
 
 	// Display an alert that song was added
 	$(".alert").alert('close');
@@ -21,8 +26,21 @@ function addSongToQueue(songId) {
 	
 }
 
-function removeSongFromQueue(songPosition) {
-	// TODO: implement removing songs from the queue by position
+function removeSongFromQueue(songId) {
+	// Remove song from the queue by id
+	var songToRemove = findSongById(songId);
+
+	if (findSongInQueue(songId)) {
+		// Remove the song from the queueSongs array
+		queueSongs = $.grep(queueSongs, function(e, i) { return e.id === songId; }, true);
+		
+		// Display an alert that song was deleted
+		$(".alert").alert('close');
+		newAlert('alert-success', songToRemove.artist + ' - ' + songToRemove.title + ' added to queue.')
+
+		// Reload the queue
+		updateQueue();
+	}
 }
 
 function updateQueue() {
@@ -34,7 +52,7 @@ function updateQueue() {
 	for (var i=0, s=1; i<queueSongs.length; i++, s++) {
 		// Add the song to the queue
 		if (queueSongs[i] != null) {
-			$('#queue_table' + ' > tbody:last').append('<tr><td>' + s + '</td><td><h5>' + queueSongs[i].title + '  <small>' + queueSongs[i].artist + '</small></h5></td><td id="' + queueSongs[i].id + '_votes' + '">' + queueSongs[i].votes + '</td><td><div class="btn-group"><a href="javascript:upVote(' + queueSongs[i].id + ');" class="btn btn-small"><span class="icon-plus"></span></a><a href="javascript:downVote(' + queueSongs[i].id + ');" class="btn btn-small"><span class="icon-minus"></span></a></div></td></tr>');
+			$('#queue_table' + ' > tbody:last').append('<tr><td>' + s + '</td><td><h5>' + queueSongs[i].title + '  <small>' + queueSongs[i].artist + '</small></h5></td><td id="' + queueSongs[i].id + '_votes' + '">' + queueSongs[i].votes + '</td><td><div class="btn-group"><a href="javascript:upVote(' + queueSongs[i].id + ');" class="btn btn-small"><span class="icon-plus"></span></a><a href="javascript:downVote(' + queueSongs[i].id + ');" class="btn btn-small"><span class="icon-minus"></span></a></div></td><td><a href="javascript:removeSongFromQueue(' + queueSongs[i].id + ');" class="btn btn-small btn-danger"><span class="icon-remove"></span></a></td></tr>');
 		}
 	}
 }

@@ -27,11 +27,9 @@ function findSongs(searchText, foundSongs) {
 }
 
 function findSongById(songId) {
-	for (var i=0; i<allSongs.length; i++) {
-		if (allSongs[i].id == songId) {
-			return allSongs[i];
-		}
-	}
+	return $.grep(allSongs, function(e) { return e.id === songId; })[0];
+}
 
-	return null;
+function findSongInQueue(songId) {
+	return $.grep(queueSongs, function(e) { return e.id === songId; })[0];
 }
