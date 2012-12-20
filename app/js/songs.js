@@ -19,6 +19,8 @@ function addSongToQueue(songId) {
 	// Add the song to the queue
 	if (songToAdd != null) {
 		$('#queue_table' + ' > tbody:last').append('<tr><td>' + nextSongIndex + '</td><td><h5>' + songToAdd.title + '  <small>' + songToAdd.artist + '</small></h5></td><td>##</td><td><div class="btn-group"><button id="plus" class="btn btn-small"><span class="icon-plus"></span></button><button id="minus" class="btn btn-small"><span class="icon-minus"></span></button></div></td></tr>');
+
+		$(".alert").alert('close');
 		newAlert('alert-success', songToAdd.artist + ' - ' + songToAdd.title + ' added to queue.')
 	}
 }

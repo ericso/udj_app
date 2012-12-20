@@ -54,9 +54,15 @@ function setupApp() {
 			updateSongList(foundSongs);
 			var foundSongsText = foundSongs.length + (foundSongs.length == 1 ? ' song found.' : ' songs found.');
 			$('#number_songs_found').html(foundSongsText);
+
+			// Send an alert after closing current alert
+			$(".alert").alert('close');
 			newAlert('alert-success', foundSongsText);
 		} else {
 			$('#number_songs_found').html('No songs found.');
+
+			// Send an alert after closing current alert
+			$(".alert").alert('close');
 			newAlert('warning', 'No songs found.')
 		}
 	});
