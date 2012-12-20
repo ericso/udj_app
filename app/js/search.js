@@ -27,3 +27,13 @@ function findSongs(searchText, foundSongs) {
 
 	return found;
 }
+
+function findSongById(songId) {
+	for (var i=0; i<allSongs.length; i++) {
+		if (allSongs[i].id == songId) {
+			return allSongs[i];
+		}
+	}
+
+	return null;
+}

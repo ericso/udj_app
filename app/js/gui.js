@@ -1,6 +1,4 @@
-////////////////////////
-/// GLOBAL VARIABLES ///
-////////////////////////
+//////////////////////// /// GLOBAL VARIABLES /// ////////////////////////
 var queueSongs; // Songs that are in the queue
 var toAddSongs; // Songs from requests that aren't yet in the database
 
