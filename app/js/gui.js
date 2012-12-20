@@ -1,6 +1,5 @@
 //////////////////////// /// GLOBAL VARIABLES /// ////////////////////////
 var queueSongs; // Songs that are in the queue
-var toAddSongs; // Songs from requests that aren't yet in the database
 
 ////////////////////////
 /// GUI MANIPULATION ///
@@ -70,8 +69,11 @@ function setupApp() {
 	$(document).ready( function() {
 		setTimeout(function () {
 			$('#queue_tab').trigger('click');
-			//alert("page loaded");
 		}, 2000);
+
+		// Initialize the queueSongs array
+		// Eventually this will be loaded from a DB
+		queueSongs = [];
 	});
 	
 }

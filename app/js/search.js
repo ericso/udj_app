@@ -1,7 +1,3 @@
-// If not found, add song to all_songs array and display notification
-// then add song to queue
-
-
 /*** Prepopulate allSongs array with some songs for testing ***/
 // THIS SHOULD BE MOVED TO A DATABASE
 var	allSongs = [{ id: 0, artist: "Janelle Monae", title: "Many Moons", album: "Metropolis: The Chase Suite" },
