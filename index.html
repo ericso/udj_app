@@ -46,129 +46,90 @@
 				</div>
 			</div>
 		</nav>
-	</div>
-	
-	<div id="index_tab_div" class="row-fluid span12">
-		<div class="page-header">
-  			<h1>Welcome!  <small>Ready to make a <strong>ReQuest</strong>?</small></h1>
-		</div>
-		<div class="well">
-			<p><strong>ReQuest</strong> simplifies the interaction between DJs and their audience by giving them the power to handle requested music using the cloud and allowing the audience to vote on the music.</p>
-		</div>
-	</div>
-	
-	<div id="queue_tab_div" class="row-fluid span12 well" style="display: none;">
-		<h4>DJ RanMan</h4>
-		<table class="table">
-			<thead>
-				<td>#</td>
-				<td>Track</td>
-				<td>Total</td>
-				<td>Vote</td>
-			</thead>
-			<tbody>
-				<tr>
-					<td>1</td>
-					<td><h5>Track<span>&nbsp;</span><small>Artist</small></h5></td>
-					<td>##</td>
-					<td>
-						<div class="btn-group">
-							<button id="plus" class="btn btn-small"><span class="icon-plus"></span></button>
-							<button id="minus" class="btn btn-small"><span class="icon-minus"></span></button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td><h5>Track<span>&nbsp;</span><small>Artist</small></h5></td>
-					<td>##</td>
-					<td>
-						<div class="btn-group">
-							<button id="plus2" class="btn btn-small"><span class="icon-plus"></span></button>
-							<button id="minus2" class="btn btn-small"><span class="icon-minus"></span></button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td><h5>Track<span>&nbsp;</span><small>Artist</small></h5></td>
-					<td>##</td>
-					<td>
-						<div class="btn-group">
-							<button id="plus3" class="btn btn-small"><span class="icon-plus"></span></button>
-							<button id="minus3" class="btn btn-small"><span class="icon-minus"></span></button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>4</td>
-					<td><h5>Track<span>&nbsp;</span><small>Artist</small></h5></td>
-					<td>##</td>
-					<td>
-						<div class="btn-group">
-							<button id="plus4" class="btn btn-small"><span class="icon-plus"></span></button>
-							<button id="minus4" class="btn btn-small"><span class="icon-minus"></span></button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>5</td>
-					<td><h5>Track<span>&nbsp;</span><small>Artist</small></h5></td>
-					<td>##</td>
-					<td>
-						<div class="btn-group">
-							<button id="plus5" class="btn btn-small"><span class="icon-plus"></span></button>
-							<button id="minus5" class="btn btn-small"><span class="icon-minus"></span></button>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<div class="pagination pagination-centered pagination-medium">
-			<ul>
-				<li class="active"><a href="#"><span class="icon-arrow-left"></span></a></li>
-				<li><a href="#"><span class="icon-arrow-right"></span></a></li>
-			</ul>
-		</div>
-	</div>
 
-	<div id="search_tab_div" class="row-fluid span12" style="display: none;">
-		<aside class="row-fluid span12">
-			<h4>Search for a track:</h4>
-			<div class="form-search form-centered">
-				<input id="song_search_input" type="text" class="input-medium"></input>
-				<button class="btn btn-primary" id="song_search_button">Search</button>
+		<!-- For displaying Bootstrap style popup notifications -->
+		<div id="alert-area" class="row-fluid span12" style="position:absolute; height:40px; left:10px; margin-right:10px; z-index:1000; overflow:hidden;"></div>
+
+		<!-- Tabs -->
+		<div id="index_tab_div" class="row-fluid span12">
+			<div class="page-header">
+	  			<h1>Welcome!  <small>Ready to make a <strong>ReQuest</strong>?</small></h1>
 			</div>
-		</aside>
+			<div class="well">
+				<p><strong>ReQuest</strong> simplifies the interaction between DJs and their audience by giving them the power to handle requested music using the cloud and allowing the audience to vote on the music.</p>
+			</div>
+		</div>
 		
-		<div class="row-fluid span12">
-			<h3>Search Results<small><span id="number_songs_found"> </span> songs found</small></h3>
-			<div id="search_results_list">
+		<div id="queue_tab_div" class="row-fluid span12 well" style="display: none;">
+			<h4>DJ RanMan</h4>
+			<table id="queue_table" class="table">
+				<thead>
+					<td>#</td>
+					<td>Track</td>
+					<td>Total</td>
+					<td>Vote</td>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td><h5>Track<span>&nbsp;</span><small>Artist</small></h5></td>
+						<td>##</td>
+						<td>
+							<div class="btn-group">
+								<button id="plus" class="btn btn-small"><span class="icon-plus"></span></button>
+								<button id="minus" class="btn btn-small"><span class="icon-minus"></span></button>
+							</div>
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+			<div class="pagination pagination-centered pagination-medium">
+				<ul>
+					<li class="active"><a href="#"><span class="icon-arrow-left"></span></a></li>
+					<li><a href="#"><span class="icon-arrow-right"></span></a></li>
+				</ul>
 			</div>
 		</div>
-	</div>
 
-	<div id="help_tab_div" class="row-fluid span12" style="display: none;">
-		<dl>
-			<dt>How do I request a song?</dt>
-			<dd>Click the <strong>Search</strong> tab, type the title or artist in the box, click <strong>Search</strong>, then select the track.</dd>
-			<dt>I requested a track but it hasn't played yet?</dt>
-			<dd>The DJ may not have the track you have requested.</dd>
-			<dt>I'm a DJ, how do I sign up for <strong>ReQuest</strong>?</dt>
-			<dd>You can email us (email address).</dd>
-			<dt>This is cool, how can I tell more people about it?</dt>
-			<dd>Click the <span class="icon-share"></span> link and you can share with any popular social network.</dd>
-		</dl>
-	</div>
+		<div id="search_tab_div" class="row-fluid span12" style="display: none;">
+			<aside class="row-fluid span12">
+				<h4>Search for a track:</h4>
+				<div class="form-search form-centered">
+					<input id="song_search_input" type="text" class="input-medium"></input>
+					<button class="btn btn-primary" id="song_search_button">Search</button>
+				</div>
+			</aside>
+			
+			<div class="row-fluid span12">
+				<h3>Search Results  <small id="number_songs_found"></small></h3>
+				<div id="search_results_list">
+				</div>
+			</div>
+		</div>
 
-	<footer class="row-fluid span12">
-		<div class="muted">
-			<p>By using this app, you are agreeing to the <a href="">Terms of Service</a>.<p>
+		<div id="help_tab_div" class="row-fluid span12" style="display: none;">
+			<dl>
+				<dt>How do I request a song?</dt>
+				<dd>Click the <strong>Search</strong> tab, type the title or artist in the box, click <strong>Search</strong>, then select the track.</dd>
+				<dt>I requested a track but it hasn't played yet?</dt>
+				<dd>The DJ may not have the track you have requested.</dd>
+				<dt>I'm a DJ, how do I sign up for <strong>ReQuest</strong>?</dt>
+				<dd>You can email us (email address).</dd>
+				<dt>This is cool, how can I tell more people about it?</dt>
+				<dd>Click the <span class="icon-share"></span> link and you can share with any popular social network.</dd>
+			</dl>
 		</div>
-		<div>
-			<p class="pull-right muted">&copy; 2012 @UDJ Interactive</p>
-		</div>
-	</footer>
+
+		<footer class="row-fluid span12">
+			<div class="muted">
+				<p>By using this app, you are agreeing to the <a href="">Terms of Service</a>.<p>
+			</div>
+			<div>
+				<p class="pull-right muted">&copy; 2012 @UDJ Interactive</p>
+			</div>
+		</footer>
+	</div>
 
 	<!-- responsive layout for all other devices -->
 	<!-- <div class="container-fluid hidden-phone">
