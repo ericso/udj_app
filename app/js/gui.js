@@ -13,6 +13,9 @@ function setupApp() {
 
 	});
 	$('#queue_tab').click( function() {
+		// Before switching to queue tab, update the queue
+		updateQueue();
+
 		// Find the currently active tab and switch the tab
 		var activeTab = $('#nav_bar .active');
 		switchTab(activeTab.attr('id'), 'queue_tab');
@@ -81,7 +84,7 @@ function setupApp() {
 // Handles switching the tabs
 function switchTab(fromTab, toTab) {
 	if (!$('#' + toTab).hasClass('disabled') && !$("#" + toTab).hasClass('active')) {
-		// Hide the currently active tab
+		// Hide the curretly active tab
 		$('#' + fromTab + "_div").slideUp();
 		// Remove the active state from the tab
 		$('#' + fromTab).removeClass('active');
