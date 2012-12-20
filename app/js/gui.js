@@ -66,6 +66,14 @@ function setupApp() {
 			newAlert('warning', 'No songs found.')
 		}
 	});
+
+	$(document).ready( function() {
+		setTimeout(function () {
+			$('#queue_tab').trigger('click');
+			//alert("page loaded");
+		}, 2000);
+	});
+	
 }
 
 // Handles switching the tabs
