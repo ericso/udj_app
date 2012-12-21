@@ -1,5 +1,6 @@
 //////////////////////// /// GLOBAL VARIABLES /// ////////////////////////
 var queueSongs; // Songs that are in the queue
+var pageLoadTimeout; // Holds timeout for transitioning from brand tab to queue tab
 
 ////////////////////////
 /// GUI MANIPULATION ///
@@ -7,12 +8,22 @@ var queueSongs; // Songs that are in the queue
 function setupApp() {
 	/*** Switching tabs event handlers ***/
 	$('#index_tab').click( function() {
+		// Cancel timeout
+		if (pageLoadTimeout) {
+			clearTimeout(pageLoadTimeout);
+		}
+
 		// Find the currently active tab and switch the tab
 		var activeTab = $('#nav_bar .active');
 		switchTab(activeTab.attr('id'), 'index_tab');
 
 	});
 	$('#queue_tab').click( function() {
+		// Cancel timeout
+		if (pageLoadTimeout) {
+			clearTimeout(pageLoadTimeout);
+		}
+
 		// Before switching to queue tab, update the queue
 		updateQueue();
 
@@ -22,12 +33,22 @@ function setupApp() {
 
 	});
 	$('#search_tab').click( function() {
+		// Cancel timeout
+		if (pageLoadTimeout) {
+			clearTimeout(pageLoadTimeout);
+		}
+
 		// Find the currently active tab and switch the tab
 		var activeTab = $('#nav_bar .active');
 		switchTab(activeTab.attr('id'), 'search_tab');
 
 	});
 	$('#help_tab').click( function() {
+		// Cancel timeout
+		if (pageLoadTimeout) {
+			clearTimeout(pageLoadTimeout);
+		}
+		
 		// Find the currently active tab and switch the tab
 		var activeTab = $('#nav_bar .active');
 		switchTab(activeTab.attr('id'), 'help_tab');
@@ -70,9 +91,7 @@ function setupApp() {
 	});
 
 	$(document).ready( function() {
-		setTimeout(function () {
-			$('#queue_tab').trigger('click');
-		}, 2000);
+		pageLoadTimeout = setTimeout(function () { $('#queue_tab').trigger('click'); }, 2000);
 
 		// Initialize the queueSongs array
 		// Eventually this will be loaded from a DB

@@ -51,6 +51,10 @@ function upVote(songId) {
 	songToUpVote.votes++;
 	// Display the new vote count
 	$('#' + songToUpVote.id + '_votes').html(songToUpVote.votes);
+
+	// Resort the queue and update it
+	resortQueue();
+	updateQueue();
 }
 
 function downVote(songId) {
@@ -62,4 +66,8 @@ function downVote(songId) {
 	}
 	// Display the new vote count
 	$('#' + songToDownVote.id + '_votes').html(songToDownVote.votes);
+
+	// Resort the queue and update it
+	resortQueue();
+	updateQueue();
 }

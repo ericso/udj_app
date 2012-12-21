@@ -13,5 +13,12 @@ function updateQueue() {
 }
 
 function resortQueue() {
-	
+	queueSongs.sort(sortByVotes);
+}
+
+function sortByVotes(a, b) {
+	var aVotes = a.votes;
+	var bVotes = b.votes;
+
+	return((aVotes < bVotes) ? 1 : ((aVotes > bVotes) ? -1 : 0));
 }
