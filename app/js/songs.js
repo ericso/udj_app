@@ -29,6 +29,10 @@ function removeSongFromQueue(songId) {
 	// Remove song from the queue by id
 	var songToRemove = findSongById(songId);
 
+	// Add the song to the queue
+	if (songToAdd != null) {
+		$('#queue_table' + ' > tbody:last').append('<tr><td>' + nextSongIndex + '</td><td><h5>' + songToAdd.title + '  <small>' + songToAdd.artist + '</small></h5></td><td>##</td><td><div class="btn-group"><button id="plus" class="btn btn-small"><strong>+</strong></button><button id="minus" class="btn btn-small"><strong>-</strong></button></div></td></tr>');
+		
 	if (findSongInQueue(songId)) {
 		// Remove the song from the queueSongs array
 		queueSongs = $.grep(queueSongs, function(e, i) { return e.id === songId; }, true);
