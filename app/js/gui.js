@@ -55,6 +55,18 @@ function setupApp() {
 
 	});
 
+	$('#share_tab').click( function() {
+		// Cancel timeout
+		if (pageLoadTimeout) {
+			clearTimeout(pageLoadTimeout);
+		}
+		
+		// Find the currently active tab and switch the tab
+		var activeTab = $('#nav_bar .active');
+		switchTab(activeTab.attr('id'), 'share_tab');
+
+	});
+
 	/*** Searching for songs event handlers ***/
 	$('#song_search_button').click ( function() {
 		// Clear the foundSongs array
