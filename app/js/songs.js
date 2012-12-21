@@ -22,8 +22,7 @@ function addSongToQueue(songId) {
 
 	// Display an alert that song was added
 	$(".alert").alert('close');
-	newAlert('alert-success', songToAdd.artist + ' - ' + songToAdd.title + ' added to queue.')
-	
+	newAlert('alert-success', songToAdd.artist + ' - ' + songToAdd.title + ' added to queue.');
 }
 
 function removeSongFromQueue(songId) {
@@ -36,26 +35,14 @@ function removeSongFromQueue(songId) {
 		
 		// Display an alert that song was deleted
 		$(".alert").alert('close');
-		newAlert('alert-success', songToRemove.artist + ' - ' + songToRemove.title + ' added to queue.')
+		newAlert('alert-success', songToRemove.artist + ' - ' + songToRemove.title + ' removed from queue.');
 
 		// Reload the queue
 		updateQueue();
 	}
 }
 
-function updateQueue() {
-	// Clear the current queue
-	$('#queue_table' + ' > tbody').empty();
 
-	// This is the index of the song in the table. Need to figure out how to handle these. Prolly get rid of them.
-
-	for (var i=0, s=1; i<queueSongs.length; i++, s++) {
-		// Add the song to the queue
-		if (queueSongs[i] != null) {
-			$('#queue_table' + ' > tbody:last').append('<tr><td>' + s + '</td><td><h5>' + queueSongs[i].title + '  <small>' + queueSongs[i].artist + '</small></h5></td><td id="' + queueSongs[i].id + '_votes' + '">' + queueSongs[i].votes + '</td><td><div class="btn-group"><a href="javascript:upVote(' + queueSongs[i].id + ');" class="btn btn-small"><span class="icon-plus"></span></a><a href="javascript:downVote(' + queueSongs[i].id + ');" class="btn btn-small"><span class="icon-minus"></span></a></div></td><td><a href="javascript:removeSongFromQueue(' + queueSongs[i].id + ');" class="btn btn-small btn-danger"><span class="icon-remove"></span></a></td></tr>');
-		}
-	}
-}
 
 function upVote(songId) {
 	// Find the song by id
@@ -70,7 +57,7 @@ function downVote(songId) {
 	// Find the song by id
 	var songToDownVote = $.grep(queueSongs, function(e) { return e.id === songId; })[0];
 	// Decrement the votes attribute
-	if (songToDownVote.votes > 0) {
+	if (songToDownVote.votes > 1) {
 		songToDownVote.votes--;
 	}
 	// Display the new vote count
