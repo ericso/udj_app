@@ -105,7 +105,7 @@ function setupApp() {
 	});
 
 	$(document).ready( function() {
-		pageLoadTimeout = setTimeout(function () { $('#queue_tab').trigger('click'); }, 2000);
+		//pageLoadTimeout = setTimeout(function () { $('#queue_tab').trigger('click'); }, 2000);
 
 		// Initialize the queueSongs array
 		// Eventually this will be loaded from a DB
