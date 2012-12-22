@@ -1,7 +1,3 @@
-//////////////////////// /// GLOBAL VARIABLES /// ////////////////////////
-var queueSongs; // Songs that are in the queue
-var pageLoadTimeout; // Holds timeout for transitioning from brand tab to queue tab
-
 ////////////////////////
 /// GUI MANIPULATION ///
 ////////////////////////
