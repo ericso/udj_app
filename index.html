@@ -34,25 +34,25 @@
 <body onload="setupApp()">
 	<!-- responsive layout for phone devices -->
 	<div class="container-fluid">
-		<nav class="row-fluid span12">
+		<nav class="row-fluid ">
 			<div id="nav_bar" class="navbar">
-				<div class="navbar-inner navbar-fixed-top">
+				<div class="navbar-inner">
 					<a class="brand active" href="javascript:void(0)" id="index_tab" >ReQuest</a>
 					<ul class="nav">
-	  					<li id="queue_tab"><a href="javascript:void(0)" >Queue</a></li>
-	  					<li id="search_tab"><a href="javascript:void(0)">Search</a></li>
-	  					<li id="help_tab"><a href="javascript:void(0)">Help</a></li>
-	  					<li id="share_tab"><a href="javascript:void(0)"><strong><span class="icon-share"></span></strong></a></li>
+	  					<li id="queue_tab"><a href="javascript:void(0)" ><strong>Queue  </strong><span class="icon-music"></span></a></li>
+	  					<li id="search_tab"><a href="javascript:void(0)"><strong>Search  </strong><span class="icon-search"></span></a></li>
+	  					<li id="help_tab"><a href="javascript:void(0)"><strong>Help  </strong><span class="icon-align-justify"></span></a></li>
+	  					<li id="share_tab"><a href="javascript:void(0)"><strong>Share  </strong><span class="icon-share"></span></a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 
 		<!-- For displaying Bootstrap style popup notifications -->
-		<div id="alert-area" class="row-fluid span12"></div>
+		<div id="alert-area" class="row-fluid" style="position:fixed;"></div>
 
 		<!-- Tabs -->
-		<div id="index_tab_div" class="row-fluid span12">
+		<div id="index_tab_div" class="row-fluid ">
 			<div class="page-header">
 	  			<h1>Welcome!  <small>Ready to make a <strong>ReQuest</strong>?</small></h1>
 			</div>
@@ -61,9 +61,9 @@
 			</div>
 		</div>
 		
-		<div id="queue_tab_div" class="row-fluid span12 well" style="display: none;">
+		<div id="queue_tab_div" class="row-fluid " style="display: none;">
 			<h4>DJ RanMan</h4>
-			<table id="queue_table" class="table">
+			<table id="queue_table" class="table well">
 				<thead>
 					<td>Position</td>
 					<td>Track</td>
@@ -82,8 +82,8 @@
 			</div> -->
 		</div>
 
-		<div id="search_tab_div" class="row-fluid span12" style="display: none;">
-			<aside class="row-fluid span12">
+		<div id="search_tab_div" class="row-fluid " style="display: none;">
+			<aside class="row-fluid ">
 				<h4>Search for a track:</h4>
 				<div class="form-search form-centered">
 					<input id="song_search_input" type="text" class="input-medium"></input>
@@ -91,14 +91,14 @@
 				</div>
 			</aside>
 			
-			<div class="row-fluid span12">
+			<div class="row-fluid ">
 				<h3>Search Results  <small id="number_songs_found"></small></h3>
 				<div id="search_results_list">
 				</div>
 			</div>
 		</div>
 
-		<div id="help_tab_div" class="row-fluid span12" style="display: none;">
+		<div id="help_tab_div" class="row-fluid " style="display: none;">
 			<dl>
 				<dt>How do I request a song?</dt>
 				<dd>Click the <strong>Search</strong> tab, type the title or artist in the box, click <strong>Search</strong>, then select the track.</dd>
@@ -111,11 +111,11 @@
 			</dl>
 		</div>
 
-		<div id="share_tab_div" class="row-fluid span12" style="display: none;">
-			<div class="row-fluid span12">
+		<div id="share_tab_div" class="row-fluid " style="display: none;">
+			<div class="row-fluid ">
 				<h3>ReQuest Social<small><span> </span>Share</small></h3>
 			</div>
-			<section class="row-fluid span12">
+			<section class="row-fluid ">
 				<ul class="nav nav-tabs nav-stacked" style="text-align:center">
 					<li><a href="sms:?body=Check%20out%20ReQuest%20http://theawkwardduck.com/">SMS Message</a></li>
 					<li><a href="">Email</a></li>
@@ -130,7 +130,7 @@
 			</section>
 		</div>
 
-		<footer class="row-fluid span12">
+		<footer class="row-fluid ">
 			<div class="muted">
 				<p>By using this app, you are agreeing to the <a href="">Terms of Service</a>.<p>
 			</div>

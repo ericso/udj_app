@@ -101,6 +101,13 @@ function setupApp() {
 		}
 	});
 
+	// Enter key submits search query
+	$("#song_search_input").keyup( function(event) {
+		if (event.keyCode == 13) { // Enter key
+			$("#song_search_button").click();
+		}
+	});
+
 	$(document).ready( function() {
 		pageLoadTimeout = setTimeout(function () { $('#queue_tab').trigger('click'); }, 2000);
 
@@ -127,6 +134,7 @@ function switchTab(fromTab, toTab) {
 		$('#' + toTab).addClass('active');
 	}
 }
+
 
 /*** Generate Bootstrap alert box ***/
 function newAlert(type, message) {
