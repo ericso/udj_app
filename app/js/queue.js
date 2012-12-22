@@ -2,8 +2,6 @@ function updateQueue() {
 	// Clear the current queue
 	$('#queue_table' + ' > tbody').empty();
 
-	// This is the index of the song in the table. Need to figure out how to handle these. Prolly get rid of them.
-
 	for (var i=0, s=1; i<queueSongs.length; i++, s++) {
 		// Add the song to the queue
 		if (queueSongs[i] != null) {

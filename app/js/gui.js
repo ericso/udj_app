@@ -9,6 +9,9 @@ function setupApp() {
 			clearTimeout(pageLoadTimeout);
 		}
 
+		// Update the DJ list
+		populateDjs();
+
 		// Find the currently active tab and switch the tab
 		var activeTab = $('#nav_bar .active');
 		switchTab(activeTab.attr('id'), 'index_tab');
@@ -110,6 +113,9 @@ function setupApp() {
 		// Initialize the queueSongs array
 		// Eventually this will be loaded from a DB
 		queueSongs = [];
+
+		// Populate the DJ list
+		populateDjs();
 	});
 	
 }

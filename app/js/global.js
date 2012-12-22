@@ -10,3 +10,12 @@ var	allSongs = [{ id: 0, artist: "Janelle Monae", title: "Many Moons", album: "M
 				{ id: 3, artist: "MIKA", title: "Love Today", album: "Life in Cartoon Motion", votes: 0 },
 				{ id: 4, artist: "Jessie J", title: "Domino", album: "Who You Are", votes: 0 }
 ];
+
+/*** Prepopulate allDjs array with DJs for testing ***/
+// THIS SHOULD BE MOVED TO A DATABASE
+var	allDjs = [{ id: 0, name: "DJ RanMan", email: "djranman@gmail.com" },
+				{ id: 1, name: "DJ Jazzy Jeff", email: "jazzyjeff@gmail.com" },
+				{ id: 2, name: "Skrillex", email: "skrillex@gmail.com" },
+				{ id: 3, name: "SleeperCell", email: "sleepercell@gmail.com" },
+				{ id: 4, name: "DeadMau5", email: "deadmau5@gmail.com" }
+];
