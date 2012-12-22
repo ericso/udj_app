@@ -54,7 +54,6 @@ function setupApp() {
 		switchTab(activeTab.attr('id'), 'help_tab');
 
 	});
-
 	$('#share_tab').click( function() {
 		// Cancel timeout
 		if (pageLoadTimeout) {
