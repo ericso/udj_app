@@ -64,3 +64,7 @@ table h5 {
 	color:blue;
 	text-decoration: none;
 	}
+/* Changes the width of tabs */
+.navbar .nav > li > a {
+  padding: 10px 5px 10px; 
+  }
