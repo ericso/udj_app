@@ -14,7 +14,7 @@ function addSongToQueue(songId) {
 
 	// Push the song onto the queue array if it isn't already there
 	if (findSongInQueue(songId)) {
-		upVote(songId)
+		upVote(songId);
 	} else {
 		queueSongs.push(findSongById(songId));
 		upVote(songId);
@@ -33,6 +33,9 @@ function removeSongFromQueue(songId) {
 		// Remove the song from the queueSongs array
 		queueSongs = $.grep(queueSongs, function(e, i) { return e.id === songId; }, true);
 		
+		// Reset the votes count of the removed song
+		songToRemove.votes = 0;
+
 		// Display an alert that song was deleted
 		$(".alert").alert('close');
 		newAlert('alert-success', songToRemove.artist + ' - ' + songToRemove.title + ' removed from queue.');
