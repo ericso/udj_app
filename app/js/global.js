@@ -1,6 +1,7 @@
 //////////////////////// /// GLOBAL VARIABLES /// ////////////////////////
 var queueSongs; // Songs that are in the queue
 var pageLoadTimeout; // Holds timeout for transitioning from brand tab to queue tab
+var currentDj; // The currently selected DJ
 
 /*** Prepopulate allSongs array with some songs for testing ***/
 // THIS SHOULD BE MOVED TO A DATABASE

@@ -9,3 +9,8 @@ function populateDjs() {
 		}
 	}
 }
+
+function selectDj(djId) {
+	currentDj = findDjById(djId);
+	alert(currentDj.name);
+}

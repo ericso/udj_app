@@ -27,3 +27,8 @@ function findSongById(songId) {
 function findSongInQueue(songId) {
 	return $.grep(queueSongs, function(e) { return e.id === songId; })[0];
 }
+
+// Find a DJ in the database by id
+function findDjById(djId) {
+	return $.grep(allDjs, function(e) { return e.id === djId; })[0];
+}
