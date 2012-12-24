@@ -5,8 +5,8 @@ function setupApp() {
 	/*** Switching tabs event handlers ***/
 	$('#index_tab').click( function() {
 		// Cancel timeout
-		if (pageLoadTimeout) {
-			clearTimeout(pageLoadTimeout);
+		if (queueTabSwitchTimeout) {
+			clearTimeout(queueTabSwitchTimeout);
 		}
 
 		// Update the DJ list
@@ -19,33 +19,47 @@ function setupApp() {
 	});
 	$('#queue_tab').click( function() {
 		// Cancel timeout
-		if (pageLoadTimeout) {
-			clearTimeout(pageLoadTimeout);
+		if (queueTabSwitchTimeout) {
+			clearTimeout(queueTabSwitchTimeout);
 		}
 
-		// Before switching to queue tab, update the queue
-		updateQueue();
+		// Check to see if a DJ has been selected
+		if (!currentDj) {
+			// Display an alert that a DJ must be selected before switching to this tab
+			$(".alert").alert('close');
+			newAlert('alert-danger', 'Please select a DJ before proceeding.');
+		} else {
+			// Before switching to queue tab, update the queue
+			updateQueue();
+			// Display the DJ name
+			$('#dj_name_bill').html(currentDj.name);
 
-		// Find the currently active tab and switch the tab
-		var activeTab = $('#nav_bar .active');
-		switchTab(activeTab.attr('id'), 'queue_tab');
-
+			// Find the currently active tab and switch the tab
+			var activeTab = $('#nav_bar .active');
+			switchTab(activeTab.attr('id'), 'queue_tab');
+		}
 	});
 	$('#search_tab').click( function() {
 		// Cancel timeout
-		if (pageLoadTimeout) {
-			clearTimeout(pageLoadTimeout);
+		if (queueTabSwitchTimeout) {
+			clearTimeout(queueTabSwitchTimeout);
 		}
 
-		// Find the currently active tab and switch the tab
-		var activeTab = $('#nav_bar .active');
-		switchTab(activeTab.attr('id'), 'search_tab');
-
+		// Check to see if a DJ has been selected
+		if (!currentDj) {
+			// Display an alert that a DJ must be selected before switching to this tab
+			$(".alert").alert('close');
+			newAlert('alert-danger', 'Please select a DJ before proceeding.');
+		} else {
+			// Find the currently active tab and switch the tab
+			var activeTab = $('#nav_bar .active');
+			switchTab(activeTab.attr('id'), 'search_tab');
+		}
 	});
 	$('#help_tab').click( function() {
 		// Cancel timeout
-		if (pageLoadTimeout) {
-			clearTimeout(pageLoadTimeout);
+		if (queueTabSwitchTimeout) {
+			clearTimeout(queueTabSwitchTimeout);
 		}
 		
 		// Find the currently active tab and switch the tab
@@ -55,8 +69,8 @@ function setupApp() {
 	});
 	$('#share_tab').click( function() {
 		// Cancel timeout
-		if (pageLoadTimeout) {
-			clearTimeout(pageLoadTimeout);
+		if (queueTabSwitchTimeout) {
+			clearTimeout(queueTabSwitchTimeout);
 		}
 		
 		// Find the currently active tab and switch the tab
@@ -108,7 +122,7 @@ function setupApp() {
 	});
 
 	$(document).ready( function() {
-		//pageLoadTimeout = setTimeout(function () { $('#queue_tab').trigger('click'); }, 2000);
+		//queueTabSwitchTimeout = setTimeout(function () { $('#queue_tab').trigger('click'); }, 2000);
 
 		// Initialize the queueSongs array
 		// Eventually this will be loaded from a DB

@@ -3,6 +3,8 @@ var queueSongs; // Songs that are in the queue
 var pageLoadTimeout; // Holds timeout for transitioning from brand tab to queue tab
 var currentDj; // The currently selected DJ
 
+var queueTabSwitchTimeout; // Timeout for switching to the queue tab
+
 /*** Prepopulate allSongs array with some songs for testing ***/
 // THIS SHOULD BE MOVED TO A DATABASE
 var	allSongs = [{ id: 0, artist: "Janelle Monae", title: "Many Moons", album: "Metropolis: The Chase Suite", votes: 0 },

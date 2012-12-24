@@ -10,13 +10,37 @@ function updateQueue() {
 	}
 }
 
+// Sort the queue in desending order by votes
 function resortQueue() {
 	queueSongs.sort(sortByVotes);
 }
 
+// Function determines order of two song requests by their votes
 function sortByVotes(a, b) {
 	var aVotes = a.votes;
 	var bVotes = b.votes;
 
 	return((aVotes < bVotes) ? 1 : ((aVotes > bVotes) ? -1 : 0));
+}
+
+// Clear the entire request queue
+function clearQueue() {
+	var songToRemove;
+
+	for (var i=0; i<queueSongs.length; i++) {
+		if (queueSongs[i] != null) {
+			songToRemove = findSongById(queueSongs[i].id);
+
+			if (findSongInQueue(songToRemove.id)) {
+				// Reset the votes count of the removed song
+				songToRemove.votes = 0;
+			}
+		}
+	}
+	// Clear the queue
+	queueSongs = [];
+
+	// Reload the queue
+	updateQueue();
+	
 }
