@@ -3,19 +3,21 @@ function populateDjs() {
 	//alert("in populateDjs");
 
 	$.ajax({
-		url: 'app/php/sql.php',
+		url: 'app/php/djs.php',
 		dataType: 'json',
 		success: function(results) {			
 			allDjs = results;
 
+			// These loops are for introspection into the returned array
 			// for (var i=0; i<results.length; i++) {
 			// 	alert(results[i].name);
 			// }
 			// $(results).each( function(key, value) {
 			// 	alert(value.name);
 			// });
-			addDjsToTable(allDjs);
 
+			// Add the DJs to the table
+			addDjsToTable(allDjs);
 		},
 		error: function(request, status, error) {
 			if (debug){

@@ -15,6 +15,7 @@ var	allSongs = [{ id: 0, artist: "Janelle Monae", title: "Many Moons", album: "M
 				{ id: 3, artist: "MIKA", title: "Love Today", album: "Life in Cartoon Motion", votes: 0 },
 				{ id: 4, artist: "Jessie J", title: "Domino", album: "Who You Are", votes: 0 }
 ];
+// var allSongs;
 
 /*** Prepopulate allDjs array with DJs for testing ***/
 // THIS SHOULD BE MOVED TO A DATABASE

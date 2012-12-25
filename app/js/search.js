@@ -2,7 +2,7 @@
 function findSongs(searchText, foundSongs) {
 	var found = false
 	searchText = searchText.toLowerCase();
-
+	
 	for (var i = 0; i < allSongs.length; i++) {
 		if ((allSongs[i].artist.toLowerCase().indexOf(searchText) >= 0) || (allSongs[i].title.toLowerCase().indexOf(searchText) >= 0) || (allSongs[i].album.toLowerCase().indexOf(searchText) >= 0)) {
 			found = true;
