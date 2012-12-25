@@ -1,19 +1,46 @@
 function populateDjs() {
+	// Grab the DJ list from the database
+	//alert("in populateDjs");
+
+	$.ajax({
+		url: 'app/php/sql.php',
+		dataType: 'json',
+		success: function(results) {			
+			allDjs = results;
+
+			// for (var i=0; i<results.length; i++) {
+			// 	alert(results[i].name);
+			// }
+			// $(results).each( function(key, value) {
+			// 	alert(value.name);
+			// });
+			addDjsToTable(allDjs);
+
+		},
+		error: function(request, status, error) {
+			if (debug){
+				alert('Got an error: ' + request.responseText + " status: "+ status + " error: " + error);
+			}
+		}
+	});
+}
+
+function addDjsToTable(djArray) {
 	// Clear the current DJ list
 	$('#dj_table' + ' > tbody').empty();
 
-	for (var i=0; i<allDjs.length; i++) {
+	for (var i=0; i<djArray.length; i++) {
 		// Add the song to the queue
-		if (allDjs[i] != null) {
+		if (djArray[i] != null) {
 			var bkgClrStyle = '';
 			var activeStyle = '';
 
 			if (currentDj) {
-				bkgClrStyle = currentDj.id === allDjs[i].id ? 'background-color: #08C' : ''
-				activeStyle = currentDj.id === allDjs[i].id ? 'active' : ''
+				bkgClrStyle = currentDj.id === djArray[i].id ? 'background-color: #08C' : ''
+				activeStyle = currentDj.id === djArray[i].id ? 'active' : ''
 			}
 
-			$('#dj_table' + ' > tbody:last').append('<tr style="' + bkgClrStyle + '"><td><h5>' + allDjs[i].name + '</h5></td><td>' + 'test_venue' + '</td><td><a href="javascript:selectDj(' + allDjs[i].id + ');" class="btn btn-small btn-success ' + activeStyle + ' "><span class="icon-headphones"></span></a></td></tr>');
+			$('#dj_table' + ' > tbody:last').append('<tr style="' + bkgClrStyle + '"><td><h5>' + djArray[i].name + '</h5></td><td>' + 'test_venue' + '</td><td><a href="javascript:selectDj(' + djArray[i].id + ');" class="btn btn-small btn-success ' + activeStyle + ' "><span class="icon-headphones"></span></a></td></tr>');
 		}
 	}
 }

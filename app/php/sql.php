@@ -1,127 +1,76 @@
 <?php
-//phpinfo();
-$logfile = "..\\..\\logs\\sql.log";
+
+/*** CREATE A LOG FILE ***/
+$logfile = '../../logs/dj.log';
 error_log("start\n", 3, $logfile);
 
-
-try 
-{
-  //create or open the database
-  $database = new SQLiteDatabase('../../databases/archive.db', 0666, $error);
-  //error_log("db $database\n", 3, $logfile);
-}
-catch(Exception $e) 
-{
-  
+/*** OPEN THE DATABASE ***/
+try {
+  // Create or open the database
+  // $djDatabase = new SQLiteDatabase('../../databases/djs.sqlite', 0666, $error);
+  $djDatabase = new SQLite3('../../databases/djs.sqlite');
+  error_log("database created\n", 3, $logfile);
+} catch(Exception $e) {
   error_log("error: $e\n", 3, $logfile);
   error_log("error: $error\n", 3, $logfile);
-  die($error);
-}
-/*
-$query = 'CREATE TABLE Events ' .
-         '(WavTime INTEGER, Time INTEGER, Event TEXT, Wav TEXT, Location TEXT, PRIMARY KEY (Time, Event, Wav))';
-         
-if(!$database->queryExec($query, $error))
-{
-  error_log("error: $error\n", 3, $logfile);
- die($error);
+  die ($error);
 }
 
-$query = 
-  'INSERT INTO Events (WavTime, Time, Event, Wav, Location) ' .
-  'VALUES (30, 1353350974, "gunshot", "asdf.wav", "Ifigeneia\'s Desk"); ' .
-         
- 'INSERT INTO Events (WavTime, Time, Event, Wav, Location) ' .
-  'VALUES (12, 1290192573, "gunshot", "asdf1.wav", "Trevor\'s Desk"); ' .
-         
-  'INSERT INTO Events (WavTime, Time, Event, Wav, Location) ' .
-  'VALUES (3, 1321728573, "alarm", "asdf.wav", "Ifigeneia\'s Desk"); ';
+
+// /*** CREATE THE Djs TABLE ***/
+// $query = 'CREATE TABLE Djs ' .
+//          '(id INTEGER, name TEXT, email TEXT, PRIMARY KEY (id))';
+
+// // if (!$djDatabase->queryExec($query, $error)) {
+// if (!$djDatabase->exec($query)) {
+//   error_log("error: $error\n", 3, $logfile);
+//   die($error);
+// }
+
+// /*** ADD DATA TO THE TABLE ***/ 
+// $query = 
+//   'INSERT INTO Djs (id, name, email) ' .
+//   'VALUES (0, "DJ RanMan", "djranman@gmail.com"); ' .
+
+//   'INSERT INTO Djs (id, name, email) ' .
+//   'VALUES (1, "DJ Jazzy Jeff", "jazzyjeff@gmail.com"); ' .
+
+//   'INSERT INTO Djs (id, name, email) ' .
+//   'VALUES (2, "Skrillex", "skrillex@gmail.com"); ' .
+
+//   'INSERT INTO Djs (id, name, email) ' .
+//   'VALUES (3, "SleeperCell", "sleepercell@gmail.com"); ' .
+
+//   'INSERT INTO Djs (id, name, email) ' .
+//   'VALUES (4, "DeadMau5", "deadmau5@gmail.com"); ';
   
-if(!$database->queryExec($query, $error))
-{
-   error_log("error: $error\n", 3, $logfile);
-   die($error);
+// // if (!$djDatabase->queryExec($query, $error)) {
+// if (!$djDatabase->exec($query)) {
+//   error_log("error: $error\n", 3, $logfile);
+//   die($error);
+// }
+
+
+/*** READ DATA FROM DATABASE ***/
+$djarray = array();
+
+/*** GRAB ALL ROWS FROM THE Djs TABLE ***/
+$query = $djDatabase->query("SELECT * FROM Djs");
+// if ($result = $djDatabase->query($query, SQLITE_BOTH, $error)) {
+// if ($result = $djDatabase->query($query)) {
+
+while($row = $query->fetchArray()) {
+  error_log("DJ id: " . $row['id'] . "\n", 3, $logfile);
+  error_log("DJ name: " . $row['name'] . "\n", 3, $logfile);
+  error_log("DJ email: " . $row['email'] . "\n", 3, $logfile);
+  array_push($djarray, $row);
 }
 
+// } else {
+//   error_log("error: $error\n", 3, $logfile);
+//   die ($error);
+// }
 
+echo json_encode($djarray);
 
-
-
-*/
-
-//read data from database
-/*$query = "SELECT * FROM Events";
-if($result = $database->query($query, SQLITE_BOTH, $error))
-{
-  while($row = $result->fetch())
-  {
-    print("WavTime: {$row['WavTime']} <br />" .
-          "Time: {$row['Time']} <br />".
-          "Event: {$row['Event']} <br />".
-          "Wav: {$row['Wav']} <br />".
-          "Location: {$row['Location']} <br /><br />");
-  }
-}
-else
-{
-  error_log("error: $error\n", 3, $logfile);
-  die($error);
-}  */
- 
- //read data from database
-$query = "SELECT DISTINCT Event FROM Events";
-if($result = $database->query($query, SQLITE_BOTH, $error))
-{
-  while($row = $result->fetch())
-  {
-    print("Event: {$row['Event']} <br /><br />");
-  }
-}
-else
-{
-  error_log("error: $error\n", 3, $logfile);
-  die($error);
-}  
- 
-$query = 
-  //'DELETE FROM Events WHERE location IN (\'Line-in Mic\',\'ifigeneia\'\'s desk\'); ';
-  'DELETE FROM Events WHERE wav IN (\'sssRecorderWav1354195485899.wav\',\'ifigeneia\'\'s desk\'); ';
-  //'DELETE FROM Events WHERE event IN (\'alarm2mono\',\'ifigeneia\'\'s desk\'); ';
-  
-if(!$database->queryExec($query, $error))
-{
-   error_log("error: $error\n", 3, $logfile);
-   die($error);
-}
-
- //read data from database
-$query = "SELECT DISTINCT Location FROM Events";
-if($result = $database->query($query, SQLITE_BOTH, $error))
-{
-  while($row = $result->fetch())
-  {
-    print("Location: {$row['Location']} <br /><br />");
-  }
-}
-else
-{
-  error_log("error: $error\n", 3, $logfile);
-  die($error);
-}  
- 
- //read data from database
-$query = "SELECT DISTINCT wav FROM Events";
-if($result = $database->query($query, SQLITE_BOTH, $error))
-{
-  while($row = $result->fetch())
-  {
-    print("wav: {$row['wav']} <br /><br />");
-  }
-}
-else
-{
-  error_log("error: $error\n", 3, $logfile);
-  die($error);
-}  
-error_log("end\n", 3, $logfile);
 ?>
