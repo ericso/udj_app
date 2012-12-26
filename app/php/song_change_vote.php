@@ -1,9 +1,20 @@
 <?php
-/// This script returns all the songs in the song database ///
 
 /*** CREATE A LOG FILE ***/
 $logfile = '../../logs/songs.log';
 error_log("start\n", 3, $logfile);
+
+$songId = $_GET["songId"];
+$voteDiff = $_GET["voteDiff"];
+
+// $escapedSearchText = sqlite_escape_string($searchText);
+$escapedSongId = $songId;
+$escapedVoteDiff = $voteDiff;
+
+error_log("song id: $songId\n", 3, $logfile);
+error_log("escaped song id: $escapedSongId\n", 3, $logfile);
+error_log("vote differential: $voteDiff\n", 3, $logfile);
+error_log("escaped vote differential: $escapedVoteDiff\n", 3, $logfile);
 
 /*** OPEN THE DATABASE ***/
 try {
@@ -19,8 +30,8 @@ try {
 /*** READ DATA FROM DATABASE ***/
 $songArray = array();
 
-/*** GRAB ALL ROWS FROM THE Songs TABLE ***/
-$query = $database->query("SELECT * FROM Songs");
+/*** SEARCH THE SONGS DATABASE ***/
+$query = $database->query("SELECT * FROM Songs WHERE (id = '$escapedSongId')");
 
 while($row = $query->fetchArray()) {
   error_log("Song id: " . $row['id'] . "\n", 3, $logfile);

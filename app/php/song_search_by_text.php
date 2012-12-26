@@ -4,6 +4,13 @@
 $logfile = '../../logs/songs.log';
 error_log("start\n", 3, $logfile);
 
+$searchText = $_GET["searchText"];
+// $escapedSearchText = sqlite_escape_string($searchText);
+$escapedSearchText = $searchText;
+
+error_log("search text: $searchText\n", 3, $logfile);
+error_log("escaped search text: $escapedSearchText\n", 3, $logfile);
+
 /*** OPEN THE DATABASE ***/
 try {
   // Create or open the database
@@ -19,7 +26,7 @@ try {
 $songArray = array();
 
 /*** SEARCH THE SONGS DATABASE ***/
-//$query = $database->query("SELECT * FROM Songs");
+$query = $database->query("SELECT * FROM Songs WHERE (artist LIKE '%$searchText%') OR (title LIKE '%$searchText%') OR (album LIKE '%$searchText%')");
 
 while($row = $query->fetchArray()) {
   error_log("Song id: " . $row['id'] . "\n", 3, $logfile);

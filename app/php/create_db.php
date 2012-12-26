@@ -59,21 +59,32 @@ if (!$database->exec($query)) {
 
 /*** ADD DATA TO THE TABLE ***/ 
 $query = 
-  'INSERT INTO Songs (id, artist, title, album, votes) ' .
-  'VALUES (0, "Janelle Monae", "Many Moons", "Metropolis: The Chase Suite", 0); ' .
+  'INSERT INTO Songs (id, artist, title, album) ' .
+  'VALUES (0, "Janelle Monae", "Many Moons", "Metropolis: The Chase Suite"); ' .
 
-  'INSERT INTO Songs (id, artist, title, album, votes) ' .
-  'VALUES (1, "Fun.", "Some Nights", "Some Nights", 0); ' .
+  'INSERT INTO Songs (id, artist, title, album) ' .
+  'VALUES (1, "Fun.", "Some Nights", "Some Nights"); ' .
 
-  'INSERT INTO Songs (id, artist, title, album, votes) ' .
-  'VALUES (2, "Fun.", "We Are Young", "Some Nights", 0); ' .
+  'INSERT INTO Songs (id, artist, title, album) ' .
+  'VALUES (2, "Fun.", "We Are Young", "Some Nights"); ' .
 
-  'INSERT INTO Songs (id, artist, title, album, votes) ' .
-  'VALUES (3, "MIKA", "Love Today", "Life in Cartoon Motion", 0); ' .
+  'INSERT INTO Songs (id, artist, title, album) ' .
+  'VALUES (3, "MIKA", "Love Today", "Life in Cartoon Motion"); ' .
 
-  'INSERT INTO Songs (id, artist, title, album, votes) ' .
-  'VALUES (4, "Jessie J", "Domino", "Who You Are", 0); ';
+  'INSERT INTO Songs (id, artist, title, album) ' .
+  'VALUES (4, "Jessie J", "Domino", "Who You Are"); ';
   
+if (!$database->exec($query)) {
+  error_log("error: $error\n", 3, $logfile);
+  die($error);
+}
+
+
+/*** CREATE THE Queue TABLE ***/
+// The queue is intended to be temporary storage. There should be a different queue for each DJ
+$query = 'CREATE TABLE Queue ' .
+         '(id INTEGER, artist TEXT, title TEXT, album TEXT, votes INTEGER, PRIMARY KEY (id))';
+
 if (!$database->exec($query)) {
   error_log("error: $error\n", 3, $logfile);
   die($error);
