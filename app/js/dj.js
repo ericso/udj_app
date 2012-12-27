@@ -1,9 +1,7 @@
 function populateDjs() {
 	// Grab the DJ list from the database
-	//alert("in populateDjs");
-
 	$.ajax({
-		url: 'app/php/djs.php',
+		url: 'app/php/dj_return_all.php',
 		dataType: 'json',
 		success: function(results) {			
 			allDjs = results;
@@ -38,29 +36,40 @@ function addDjsToTable(djArray) {
 			var activeStyle = '';
 
 			if (currentDj) {
-				bkgClrStyle = currentDj.id === djArray[i].id ? 'background-color: #08C' : ''
-				activeStyle = currentDj.id === djArray[i].id ? 'active' : ''
+				bkgClrStyle = currentDj.id === djArray[i].dj_id ? 'background-color: #08C' : ''
+				activeStyle = currentDj.id === djArray[i].dj_id ? 'active' : ''
 			}
 
-			$('#dj_table' + ' > tbody:last').append('<tr style="' + bkgClrStyle + '"><td><h5>' + djArray[i].name + '</h5></td><td>' + 'test_venue' + '</td><td><a href="javascript:selectDj(' + djArray[i].id + ');" class="btn btn-small btn-success ' + activeStyle + ' "><span class="icon-headphones"></span></a></td></tr>');
+			$('#dj_table' + ' > tbody:last').append('<tr style="' + bkgClrStyle + '"><td><h5>' + djArray[i].dj_name + '</h5></td><td>' + djArray[i].ve_name + '</td><td><a href="javascript:selectDj(' + djArray[i].dj_id + ',' + djArray[i].qu_id + ');" class="btn btn-small btn-success ' + activeStyle + ' "><span class="icon-headphones"></span></a></td></tr>');
 		}
 	}
 }
 
-function selectDj(djId) {
-	// Check the activeDjs list for Dj. If not found, active a new DJ
-	if (!(currentDj = findActiveDjById(djId))) {
-		currentDj = findDjById(djId); // Set the current DJ by id
-		if (!currentDj.queueSongs) {
-			currentDj.queueSongs = [];
-		}; // Initialize the DJs song queue FIX: need to pull this from the DB
-		activeDjs.push(currentDj); // Add the new DJ to the list of active DJs
-	}
+function selectDj(djId, queueId) {
+	currentDj = findDjById(djId); // Set the current DJ by id
+	currentQueueId = queueId; // Set the current queue id
+
+	// Initialize the DJs song queue, pull this from SongToQueue table
+	$.ajax({
+		url: 'app/php/queue_return_songs.php',
+		dataType: 'json',
+		data: {
+			"currentQueueId" : currentQueueId
+		},
+		success: function(results) {			
+			queueSongs = results;
+		},
+		error: function(request, status, error) {
+			// Error occured grabbing the queue from the database, set the queue to an empty array
+			queueSongs = [];
+
+			if (debug){
+				alert('Got an error: ' + request.responseText + " status: "+ status + " error: " + error);
+			}
+		}
+	});
 	
 	populateDjs(); // Reload the DJ table to show highlighting of current DJ
-
-	// FIX: Right now, the queue will be cleared when the DJ changes. Need to fix so that each DJ has a queue associated with them. This will come with the implementation of the databases
-	//clearQueue();
 
 	queueTabSwitchTimeout = setTimeout(function () { $('#queue_tab').trigger('click'); }, 500); // Switch to the queue tab after half-second
 }

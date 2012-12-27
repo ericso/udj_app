@@ -26,14 +26,13 @@ try {
 $songArray = array();
 
 /*** SEARCH THE SONGS DATABASE ***/
-$query = $database->query("SELECT * FROM Songs WHERE (id = '$escapedSongId')");
+$query = $database->query("SELECT * FROM Songs WHERE (so_id = '$escapedSongId')");
 
 while($row = $query->fetchArray()) {
-  error_log("Song id: " . $row['id'] . "\n", 3, $logfile);
-  error_log("Song artist: " . $row['artist'] . "\n", 3, $logfile);
-  error_log("Song title: " . $row['title'] . "\n", 3, $logfile);
-  error_log("Song album: " . $row['album'] . "\n", 3, $logfile);
-  error_log("Song votes: " . $row['votes'] . "\n", 3, $logfile);
+  error_log("Song id: " . $row['so_id'] . "\n", 3, $logfile);
+  error_log("Song artist: " . $row['so_artist'] . "\n", 3, $logfile);
+  error_log("Song title: " . $row['so_title'] . "\n", 3, $logfile);
+  error_log("Song album: " . $row['so_album'] . "\n", 3, $logfile);\
   array_push($songArray, $row);
 }
 

@@ -28,6 +28,10 @@ var allSongs;
 // ];
 var allDjs;
 
-var queueSongs; // Songs that are in the queue
-var activeDjs; // Queue holds the DJs that have been "activated/selected"
+
+//var activeDjs; // Queue holds the DJs that have been "activated/selected"
+
 var currentDj; // The currently selected DJ
+var currentVenue; // The venue currently at which the DJ is playing
+var currentQueueId; // The id of the queue associated with the current DJ and Venue
+var queueSongs; // Songs that are in the queue

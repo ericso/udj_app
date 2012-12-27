@@ -26,14 +26,14 @@ try {
 $songArray = array();
 
 /*** SEARCH THE SONGS DATABASE ***/
-$query = $database->query("SELECT * FROM Songs WHERE (artist LIKE '%$searchText%') OR (title LIKE '%$searchText%') OR (album LIKE '%$searchText%')");
+$query = $database->query("SELECT * FROM Songs WHERE (so_artist LIKE '%$searchText%') OR (so_title LIKE '%$searchText%') OR (so_album LIKE '%$searchText%')");
 
 while($row = $query->fetchArray()) {
-  error_log("Song id: " . $row['id'] . "\n", 3, $logfile);
-  error_log("Song artist: " . $row['artist'] . "\n", 3, $logfile);
-  error_log("Song title: " . $row['title'] . "\n", 3, $logfile);
-  error_log("Song album: " . $row['album'] . "\n", 3, $logfile);
-  error_log("Song votes: " . $row['votes'] . "\n", 3, $logfile);
+  error_log("Song id: " . $row['so_id'] . "\n", 3, $logfile);
+  error_log("Song artist: " . $row['so_artist'] . "\n", 3, $logfile);
+  error_log("Song title: " . $row['so_title'] . "\n", 3, $logfile);
+  error_log("Song album: " . $row['so_album'] . "\n", 3, $logfile);
+  error_log("Song votes: " . $row['so_votes'] . "\n", 3, $logfile);
   array_push($songArray, $row);
 }
 

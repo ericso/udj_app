@@ -16,7 +16,7 @@ function updateSongList(foundSongs) {
 
 	// Add each found song to the results list
 	for (var i = 0; i < foundSongs.length; i++) {
-		var divToAppend = $('<div class="well"><a class="pull-left" href="javascript:void(0);"><img class="thumbnail" src="assets/img/holder.png"></a><a href="javascript:addSongToQueue(' + foundSongs[i].id + ');" type="submit" class="btn btn-success pull-right">Request</a><div class="results-info"><h4>' + foundSongs[i].title + '<span> </span><small>' + foundSongs[i].artist + '</small></h4><p>' + foundSongs[i].album + '</p></div></div>');
+		var divToAppend = $('<div class="well"><a class="pull-left" href="javascript:void(0);"><img class="thumbnail" src="assets/img/holder.png"></a><a href="javascript:addSongToQueue(' + foundSongs[i].so_id + ');" type="submit" class="btn btn-success pull-right">Request</a><div class="results-info"><h4>' + foundSongs[i].so_title + '<span> </span><small>' + foundSongs[i].so_artist + '</small></h4><p>' + foundSongs[i].so_album + '</p></div></div>');
 
 		$('#search_results_list').append(divToAppend);
 	}
@@ -34,13 +34,20 @@ function addSongToQueue(songId) {
 			data: {"songId" : songId},
 			success: function(results) {
 				if (results.length > 0) {
-					currentDj.queueSongs.push(results[0]);					
+					// Initialize the votes of the song to zero (need to make sure this is appropriate behavior)
+					results[0].stq_votes = 0;
+
+					queueSongs.push(results[0]);					
 					upVote(songId);
 				}
+
+				// Bootstrap alert for song add
+				$(".alert").alert('close');
+				newAlert('alert-success', 'Added ' + results[0].so_artist + ' - ' + results[0].so_title + ' to the queue.');
 			},
 			error: function(request, status, error) {
 				if (debug){
-					alert('search_songs location got an error: ' + request.responseText + " status: "+status +" error: "+error);
+					alert('search_songs location got an error: ' + request.responseText + " status: " + status + " error: " + error);
 				}
 			}
 		});
@@ -51,7 +58,7 @@ function removeSongFromQueue(songId) {
 	// Remove song from the queue by id
 	if (findSongInQueue(songId)) {
 		// Remove the song from the queueSongs array
-		currentDj.queueSongs = $.grep(currentDj.queueSongs, function(e, i) { return e.id === songId; }, true);
+		queueSongs = $.grep(queueSongs, function(e, i) { return e.so_id === songId; }, true);
 
 		// Reload the queue
 		updateQueue();
@@ -60,17 +67,17 @@ function removeSongFromQueue(songId) {
 
 function upVote(songId) {
 	// Find the song by id
-	var songToUpVote = $.grep(currentDj.queueSongs, function(e) { return e.id === songId; })[0];
+	var songToUpVote = $.grep(queueSongs, function(e) { return e.so_id === songId; })[0];
 
 	// Increment the votes attribute
-	if (songToUpVote.votes) {
-		songToUpVote.votes++;
+	if (songToUpVote.stq_votes) {
+		songToUpVote.stq_votes++;
 	} else {
-		songToUpVote.votes = 1;
+		songToUpVote.stq_votes = 1;
 	}
 
 	// Display the new vote count
-	$('#' + songToUpVote.id + '_votes').html(songToUpVote.votes);
+	$('#' + songToUpVote.so_id + '_votes').html(songToUpVote.stq_votes);
 
 	// Resort the queue and update it
 	resortQueue();
@@ -79,15 +86,15 @@ function upVote(songId) {
 
 function downVote(songId) {
 	// Find the song by id
-	var songToDownVote = $.grep(currentDj.queueSongs, function(e) { return e.id === songId; })[0];
+	var songToDownVote = $.grep(queueSongs, function(e) { return e.so_id === songId; })[0];
 	// Decrement the votes attribute
-	if (songToDownVote.votes > 1) {
-		songToDownVote.votes--;
+	if (songToDownVote.stq_votes > 1) {
+		songToDownVote.stq_votes--;
 	} else {
-		songToUpVote.votes = 1;
+		songToUpVote.stq_votes = 1;
 	}
 	// Display the new vote count
-	$('#' + songToDownVote.id + '_votes').html(songToDownVote.votes);
+	$('#' + songToDownVote.so_id + '_votes').html(songToDownVote.stq_votes);
 
 	// Resort the queue and update it
 	resortQueue();

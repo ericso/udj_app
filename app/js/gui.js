@@ -107,7 +107,7 @@ function setupApp() {
 
 	$(document).ready( function() {
 		// CREATE DATABASES
-		// FIX: For now, this is to be run initially and then commented out
+		// FIX: For now, this is to be run initially and then commented out 
 		// $.ajax({
 		// 	url: 'app/php/create_db.php',
 		// 	dataType: 'json',
@@ -122,10 +122,6 @@ function setupApp() {
 		// });
 
 		//queueTabSwitchTimeout = setTimeout(function () { $('#queue_tab').trigger('click'); }, 2000);
-
-		// Initialize the queueSongs array
-		// Eventually this will be loaded from a DB
-		//queueSongs = [];
 
 		// Populate the DJ list
 		populateDjs();
