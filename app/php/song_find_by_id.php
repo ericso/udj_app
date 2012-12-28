@@ -2,7 +2,8 @@
 
 /*** CREATE A LOG FILE ***/
 $logfile = '../../logs/songs.log';
-error_log("start\n", 3, $logfile);
+error_log("---------------------------------\n", 3, $logfile);
+error_log("start: song_find_by_id.php\n", 3, $logfile);
 
 $songId = $_GET["songId"];
 // $escapedSearchText = sqlite_escape_string($searchText);

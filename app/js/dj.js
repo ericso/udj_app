@@ -30,14 +30,14 @@ function addDjsToTable(djArray) {
 	$('#dj_table' + ' > tbody').empty();
 
 	for (var i=0; i<djArray.length; i++) {
-		// Add the song to the queue
+		// Add the DJ to the list
 		if (djArray[i] != null) {
 			var bkgClrStyle = '';
 			var activeStyle = '';
 
 			if (currentDj) {
-				bkgClrStyle = currentDj.id === djArray[i].dj_id ? 'background-color: #08C' : ''
-				activeStyle = currentDj.id === djArray[i].dj_id ? 'active' : ''
+				bkgClrStyle = currentDj.dj_id === djArray[i].dj_id ? 'background-color: #08C' : ''
+				activeStyle = currentDj.dj_id === djArray[i].dj_id ? 'active' : ''
 			}
 
 			$('#dj_table' + ' > tbody:last').append('<tr style="' + bkgClrStyle + '"><td><h5>' + djArray[i].dj_name + '</h5></td><td>' + djArray[i].ve_name + '</td><td><a href="javascript:selectDj(' + djArray[i].dj_id + ',' + djArray[i].qu_id + ');" class="btn btn-small btn-success ' + activeStyle + ' "><span class="icon-headphones"></span></a></td></tr>');
@@ -51,9 +51,8 @@ function selectDj(djId, queueId) {
 	// [{ songid, queueid, votes}, ...]
 
 	// Save song queue only if there's a queue to save
-	if (undefined != currentQueueId) {
-		alert('about to save the current queue');
 
+	if (undefined != currentQueueId) {
 		var songsToSaveArr = [];
 		for(var i=0; i<queueSongs.length; i++) {
 			songsToSaveArr.push({ 'stq_songId': queueSongs[i].so_id, 'stq_queueId': currentQueueId, 'stq_votes': queueSongs[i].stq_votes });
@@ -67,7 +66,7 @@ function selectDj(djId, queueId) {
 				"songsToSaveArr" : songsToSaveArr
 			},
 			success: function(results) {			
-				alert("songs saved?")
+				//alert("songs saved")
 			},
 			error: function(request, status, error) {
 				if (debug){

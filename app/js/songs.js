@@ -47,7 +47,7 @@ function addSongToQueue(songId) {
 			},
 			error: function(request, status, error) {
 				if (debug){
-					alert('search_songs location got an error: ' + request.responseText + " status: " + status + " error: " + error);
+					alert('song_find_by_id location got an error: ' + request.responseText + " status: " + status + " error: " + error);
 				}
 			}
 		});
@@ -62,6 +62,24 @@ function removeSongFromQueue(songId) {
 
 		// Reload the queue
 		updateQueue();
+
+		// Remove the song from the SongToQueue table in the database
+		$.ajax({
+			url: 'app/php/song_remove_from_queue.php',
+			dataType: 'json',
+			data: {
+				"songId" : songId,
+				"queueId" : currentQueueId,
+			},
+			success: function(results) {
+				//alert('song deleted');
+			},
+			error: function(request, status, error) {
+				if (debug){
+					alert('song_remove_by_id location got an error: ' + request.responseText + " status: " + status + " error: " + error);
+				}
+			}
+		});
 	}
 }
 
