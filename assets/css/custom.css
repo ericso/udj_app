@@ -1,49 +1,6 @@
 /* Custom Child Style Sheet for Bootstrap */
 /* Created by @theawkwardduck */
 
-
-/* Changes style of mobile hero unit */
-.mobile-hero-unit {
-  padding: 10px;
-  margin-bottom: 15px;
-  font-size: 18px;
-  font-weight: 200;
-  line-height: 30px;
-  color: inherit;
-  background-color: #eeeeee;
-  -webkit-border-radius: 6px;
-     -moz-border-radius: 6px;
-          border-radius: 6px;
-}
-
-.mobile-hero-unit h1 {
-  margin-bottom: 0;
-  font-size: 40px;
-  line-height: 1;
-  letter-spacing: -1px;
-  color: inherit;
-}
-
-.mobile-hero-unit li {
-  line-height: 30px;
-}
-
-.mobile-hero-unit h2 {
-  margin-bottom: 0;
-  font-size: 30px;
-  line-height: 1;
-  letter-spacing: -1px;
-  color: inherit;
-}
-
-.mobile-hero-unit h3 {
-  margin-bottom: 0;
-  font-size: 25px;
-  line-height: 1;
-  letter-spacing: -1px;
-  color: inherit;
-}
-
 /* Styles title/artist vertically against the image in results page. */
 .results-info {
 	padding-left:80px;
@@ -64,7 +21,18 @@ table h5 {
 	color:blue;
 	text-decoration: none;
 	}
-/* Changes the width of tabs */
+
+/* Changes the width of navbar and dropdown to fit on a mobile browser */
 .navbar .nav > li > a {
-  padding: 10px 5px 10px; 
+  padding: 10px 10px 10px 12px; 
+  margin-left: 0px;
+}
+
+.navbar-inner {
+  padding-right: 0px;
+  padding-left: 5px;
+}
+
+.navbar .nav .divider-vertical {
+  margin-right: -2px;
 }
