@@ -28,7 +28,7 @@ $query = $database->query("SELECT d.dj_id, d.dj_name, d.dj_email, v.ve_id, v.ve_
                            ON d.dj_id = qd.qtd_djId JOIN Queues AS q
                            ON qd.qtd_queueId = q.qu_id JOIN QueueToVenue AS qv
                            ON qv.qtv_queueId = q.qu_id JOIN Venues AS v
-                           ON qv.qtv_venueId = v.ve_id");
+                           ON qv.qtv_venueId = v.ve_id;");
 
 while($row = $query->fetchArray()) {
   error_log("DJ id: " . $row['dj_id'] . "\n", 3, $logfile);

@@ -18,7 +18,7 @@ try {
 
 /*** CREATE THE Djs TABLE ***/
 $query = 'CREATE TABLE Djs ' .
-         '(dj_id INTEGER, dj_name TEXT, dj_email TEXT, PRIMARY KEY (dj_id))';
+         '(dj_id INTEGER, dj_name TEXT, dj_email TEXT, PRIMARY KEY (dj_id));';
 
 if (!$database->exec($query)) {
   error_log("error: $error\n", 3, $logfile);
@@ -52,7 +52,7 @@ if (!$database->exec($query)) {
 
 /*** CREATE THE Songs TABLE ***/
 $query = 'CREATE TABLE Songs ' .
-         '(so_id INTEGER, so_artist TEXT, so_title TEXT, so_album TEXT, PRIMARY KEY (so_id))';
+         '(so_id INTEGER, so_artist TEXT, so_title TEXT, so_album TEXT, PRIMARY KEY (so_id));';
 
 if (!$database->exec($query)) {
   error_log("error: $error\n", 3, $logfile);
@@ -85,7 +85,7 @@ if (!$database->exec($query)) {
 
 /*** CREATE THE Venues TABLE ***/
 $query = 'CREATE TABLE Venues ' .
-         '(ve_id INTEGER, ve_name TEXT, PRIMARY KEY (ve_id))';
+         '(ve_id INTEGER, ve_name TEXT, PRIMARY KEY (ve_id));';
 
 if (!$database->exec($query)) {
   error_log("error: $error\n", 3, $logfile);
@@ -118,7 +118,7 @@ if (!$database->exec($query)) {
 
 /*** CREATE THE Queues TABLE ***/
 $query = 'CREATE TABLE Queues ' .
-         '(qu_id INTEGER, PRIMARY KEY (qu_id))';
+         '(qu_id INTEGER, PRIMARY KEY (qu_id));';
 // Will add 'date INTEGER' to the Queues table later
 
 if (!$database->exec($query)) {
@@ -157,7 +157,7 @@ if (!$database->exec($query)) {
 
 /*** CREATE THE QueueToDj TABLE ***/
 $query = 'CREATE TABLE QueueToDj ' .
-         '(qtd_queueId INTEGER, qtd_djId INTEGER, PRIMARY KEY (qtd_queueId, qtd_djId))';
+         '(qtd_queueId INTEGER, qtd_djId INTEGER, PRIMARY KEY (qtd_queueId, qtd_djId));';
 
 if (!$database->exec($query)) {
   error_log("error: $error\n", 3, $logfile);
@@ -191,7 +191,7 @@ if (!$database->exec($query)) {
 
 /*** CREATE THE QueueToVenue TABLE ***/
 $query = 'CREATE TABLE QueueToVenue ' .
-         '(qtv_queueId INTEGER, qtv_venueId INTEGER, PRIMARY KEY (qtv_queueId, qtv_venueId))';
+         '(qtv_queueId INTEGER, qtv_venueId INTEGER, PRIMARY KEY (qtv_queueId, qtv_venueId));';
 
 if (!$database->exec($query)) {
   error_log("error: $error\n", 3, $logfile);
@@ -226,7 +226,7 @@ if (!$database->exec($query)) {
 
 /*** CREATE THE SongToQueue TABLE ***/
 $query = 'CREATE TABLE SongToQueue ' .
-         '(stq_songId INTEGER, stq_queueId INTEGER, stq_votes INTEGER, PRIMARY KEY (stq_songId, stq_queueId))';
+         '(stq_songId INTEGER, stq_queueId INTEGER, stq_votes INTEGER, PRIMARY KEY (stq_songId, stq_queueId));';
 
 if (!$database->exec($query)) {
   error_log("error: $error\n", 3, $logfile);

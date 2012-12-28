@@ -46,6 +46,37 @@ function addDjsToTable(djArray) {
 }
 
 function selectDj(djId, queueId) {
+	// If there's a currentDj, save the queue
+	// Build the array to save the queue
+	// [{ songid, queueid, votes}, ...]
+
+	// Save song queue only if there's a queue to save
+	if (undefined != currentQueueId) {
+		alert('about to save the current queue');
+
+		var songsToSaveArr = [];
+		for(var i=0; i<queueSongs.length; i++) {
+			songsToSaveArr.push({ 'stq_songId': queueSongs[i].so_id, 'stq_queueId': currentQueueId, 'stq_votes': queueSongs[i].stq_votes });
+		}
+
+		$.ajax({
+			async: false, // This will block until return; necessary b/c using SQLITE db, can remove when switch to other SQL db
+			url: 'app/php/queue_save_songs.php',
+			dataType: 'json',
+			data: {
+				"songsToSaveArr" : songsToSaveArr
+			},
+			success: function(results) {			
+				alert("songs saved?")
+			},
+			error: function(request, status, error) {
+				if (debug){
+					alert('Got an error: ' + request.responseText + " status: "+ status + " error: " + error);
+				}
+			}
+		});
+	}
+
 	currentDj = findDjById(djId); // Set the current DJ by id
 	currentQueueId = queueId; // Set the current queue id
 
