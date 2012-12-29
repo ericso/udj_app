@@ -1,8 +1,9 @@
 <?php
 
 /*** CREATE A LOG FILE ***/
-$logfile = '../../logs/dj.log';
-error_log("start\n", 3, $logfile);
+$logfile = "../../logs/dj.log";
+error_log("---------------------------------\n", 3, $logfile);
+error_log("start: dj_return_all.php\n", 3, $logfile);
 
 /*** OPEN THE DATABASE ***/
 try {

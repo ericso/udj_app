@@ -39,6 +39,9 @@ function addSongToQueue(songId) {
 
 					queueSongs.push(results[0]);					
 					upVote(songId);
+
+					// Switch to the queue tab
+					$('#queue_tab').trigger('click');
 				}
 
 				// Bootstrap alert for song add

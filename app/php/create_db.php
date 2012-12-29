@@ -1,8 +1,9 @@
 <?php
 
 /*** CREATE A LOG FILE ***/
-$logfile = '../../logs/create_database.log';
-error_log("start\n", 3, $logfile);
+$logfile = '../../logs/database.log';
+error_log("---------------------------------\n", 3, $logfile);
+error_log("start: create_db.php\n", 3, $logfile);
 
 /*** OPEN THE DATABASE ***/
 try {

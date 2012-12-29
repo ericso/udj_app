@@ -81,21 +81,29 @@ function setupApp() {
 
 	/*** Searching for songs event handlers ***/
 	$('#song_search_button').click ( function() {
-		// Clear the foundSongs array
-		var foundSongs = [];
+		// Check to see if a DJ has been selected
+		if (!currentDj) {
+			// Display an alert that a DJ must be selected before switching to this tab
+			$(".alert").alert('close');
+			newAlert('alert-danger', 'Please select a DJ before proceeding.');
+		} else {
+			// Grab the text from the search box
+			var searchText = $('#song_search_input').val();
 
-		// Empty the song list
-		$('#search_results_list').empty();
+			foundFlag = false; // Flag set to true if a song is found
+			if (searchText) {
+				// Clear the foundSongs array
+				var foundSongs = [];
 
-		// Grab the text from the search box
-		var searchText = $('#song_search_input').val();
+				// Empty the song list
+				$('#search_results_list').empty();
+				// Search the allSongs array for song
+				findSongs(searchText, foundSongs);
 
-		foundFlag = false; // Flag set to true if a song is found
-		if (searchText) {
-			// Search the allSongs array for song
-			findSongs(searchText, foundSongs);
+				// Switch to the search tab
+				$('#search_tab').trigger('click');
+			}
 		}
-
 	});
 
 	// Enter key submits search query

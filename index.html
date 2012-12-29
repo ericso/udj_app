@@ -42,13 +42,16 @@
 				<div class="navbar-inner">
 					<a class="brand active" href="javascript:void(0)" id="index_tab" >ReQuest</a>
 					<ul class="nav pull-right">
-						<li><form class="navbar-search"><input type="text" class="search-query input-small" placeholder="Search"></form></li>
+						<div class="navbar-search input-append">
+							<input id="song_search_input" type="text" class="input-small" placeholder="Search">
+							<button id="song_search_button" class="btn btn-primary button-small">Search</button>
+						</div>
 	  					<li class="divider-vertical"></li>
   						<li class="dropdown">
     						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-align-justify"></span></a>
     						<ul class="dropdown-menu">
     							<li id="queue_tab" class="pull-right"><a href="javascript:void(0)" ><strong>Queue  </strong><span class="icon-music"></span></a></li>
-	  							<li id="search_tab" class="pull-right"><a href="javascript:void(0)"><strong>Search  </strong><span class="icon-search"></span></a></li>
+	  							<li id="search_tab" class="pull-right"><a href="javascript:void(0)"><strong>Results  </strong><span class="icon-search"></span></a></li>
     							<li id="help_tab" class="pull-right"><a href="javascript:void(0)"><strong>Help  </strong><span class="icon-question-sign"></span></a></li>
 	  							<li id="share_tab" class="pull-right"><a href="javascript:void(0)"><strong>Share  </strong><span class="icon-share"></span></a></li>
     						</ul>
@@ -104,15 +107,7 @@
 			</div> -->
 		</div>
 
-		<div id="search_tab_div" class="row-fluid " style="display: none;">
-			<aside class="row-fluid ">
-				<h4>Search for a track:</h4>
-				<div class="form-search form-centered">
-					<input id="song_search_input" type="text" class="input-medium"></input>
-					<button class="btn btn-primary" id="song_search_button">Search</button>
-				</div>
-			</aside>
-			
+		<div id="search_tab_div" class="row-fluid " style="display: none;">			
 			<div class="row-fluid ">
 				<h3>Search Results  <small id="number_songs_found"></small></h3>
 				<div id="search_results_list">
