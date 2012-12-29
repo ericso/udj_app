@@ -90,28 +90,12 @@ function setupApp() {
 		// Grab the text from the search box
 		var searchText = $('#song_search_input').val();
 
-		var foundFlag = false; // Flag set to true if a song is found
+		foundFlag = false; // Flag set to true if a song is found
 		if (searchText) {
 			// Search the allSongs array for song
-			foundFlag = findSongs(searchText, foundSongs);
+			findSongs(searchText, foundSongs);
 		}
 
-		if (foundFlag) {
-			// Update the number of songs found
-			updateSongList(foundSongs);
-			var foundSongsText = foundSongs.length + (foundSongs.length == 1 ? ' song found.' : ' songs found.');
-			$('#number_songs_found').html(foundSongsText);
-
-			// Send an alert after closing current alert
-			$(".alert").alert('close');
-			newAlert('alert-success', foundSongsText);
-		} else {
-			$('#number_songs_found').html('No songs found.');
-
-			// Send an alert after closing current alert
-			$(".alert").alert('close');
-			newAlert('warning', 'No songs found.')
-		}
 	});
 
 	// Enter key submits search query
@@ -122,14 +106,28 @@ function setupApp() {
 	});
 
 	$(document).ready( function() {
-		//queueTabSwitchTimeout = setTimeout(function () { $('#queue_tab').trigger('click'); }, 2000);
+		// CREATE DATABASES
+		// FIX: For now, this is to be run initially and then commented out 
+		// $.ajax({
+		// 	url: 'app/php/create_db.php',
+		// 	dataType: 'json',
+		// 	success: function() {			
+		// 		alert("Database created");
+		// 	},
+		// 	error: function(request, status, error) {
+		// 		if (debug){
+		// 			alert('Got an error: ' + request.responseText + " status: "+ status + " error: " + error);
+		// 		}
+		// 	}
+		// });
 
-		// Initialize the queueSongs array
-		// Eventually this will be loaded from a DB
-		queueSongs = [];
+		//queueTabSwitchTimeout = setTimeout(function () { $('#queue_tab').trigger('click'); }, 2000);
 
 		// Populate the DJ list
 		populateDjs();
+
+		// Set the list of active DJs FIX: need to pull this from a database
+		activeDjs = [];
 	});
 	
 }
