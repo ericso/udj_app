@@ -38,6 +38,7 @@ while($row = $query->fetchArray()) {
   error_log("Venue id: " . $row['ve_id'] . "\n", 3, $logfile);
   error_log("Venue name: " . $row['ve_name'] . "\n", 3, $logfile);
   error_log("Queue id: " . $row['qu_id'] . "\n", 3, $logfile);
+  
   array_push($djarray, $row);
 }
 

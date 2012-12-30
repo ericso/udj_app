@@ -1,13 +1,9 @@
 function populateDjs() {
 	// Grab the DJ list from the database
-	alert("about to call dj_return_all");
-
 	$.ajax({
 		url: 'app/php/dj_return_all.php',
 		dataType: 'json',
 		success: function(results) {
-			alert("dj_return_all success");
-
 			allDjs = results;
 
 			// These loops are for introspection into the returned array
