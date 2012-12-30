@@ -80,36 +80,12 @@ function setupApp() {
 	});
 
 	/*** Searching for songs event handlers ***/
-	$('#song_search_button').click ( function() {
-		// Check to see if a DJ has been selected
-		if (!currentDj) {
-			// Display an alert that a DJ must be selected before switching to this tab
-			$(".alert").alert('close');
-			newAlert('alert-danger', 'Please select a DJ before proceeding.');
-		} else {
-			// Grab the text from the search box
-			var searchText = $('#song_search_input').val();
-
-			foundFlag = false; // Flag set to true if a song is found
-			if (searchText) {
-				// Clear the foundSongs array
-				var foundSongs = [];
-
-				// Empty the song list
-				$('#search_results_list').empty();
-				// Search the allSongs array for song
-				findSongs(searchText, foundSongs);
-
-				// Switch to the search tab
-				$('#search_tab').trigger('click');
-			}
-		}
-	});
+	//$('#song_search_button').click ( function() { findSongHandler() });
 
 	// Enter key submits search query
 	$("#song_search_input").keyup( function(event) {
 		if (event.keyCode == 13) { // Enter key
-			$("#song_search_button").click();
+			findSongHandler();
 		}
 	});
 
