@@ -7,32 +7,53 @@
 	padding-top:6px;
 	}
 	
-/* Moves the track/artist <h5> up in the table. */
+/* Moves the track/artist <h5> up in the queue table. */
 table h5 {
 	margin-top:0px;
 	}
 	
 /* Makes mobile title blue */
-.navbar .brand:hover {
-	color:#777777;
-	text-decoration: none;
-	}
 .navbar .brand {
 	color:blue;
 	text-decoration: none;
 	}
+/* Changes color on hover (does nothing for mobile layout).*/
+.navbar .brand:hover {
+	color:#777777;
+	text-decoration: none;
+	}
 
-/* Changes the width of navbar and dropdown to fit on a mobile browser */
+/* Changes the padding of dropdown button. */
 .navbar .nav > li > a {
-  padding: 10px 10px 10px 12px; 
-  margin-left: 0px;
+  	padding: 10px 10px 10px 12px; 
 }
 
+/* Shortens navigation bar padding to fit mobie layout. */
 .navbar-inner {
-  padding-right: 0px;
-  padding-left: 5px;
+  	padding-right: 0px; 
+  	padding-left: 10px;
 }
 
+/* Moves vertical divider closer to dropdown button */ 
 .navbar .nav .divider-vertical {
-  margin-right: -2px;
+  	margin-right: -2px;
+}
+
+/* Positions search icon in the search box */
+#search-icon {
+  	display: inline-block;
+  	position: relative;
+  	left: -12px;
+  	bottom: 2px;
+	}
+
+/* Removes bottom margin on search box */
+input[type="text"] {
+	margin-bottom: 6px;
+	margin-right: -10px;
+}
+
+/* Removes dropdown overlap on dropdown button */
+.dropdown-menu {
+	margin-top: 8px;
 }
