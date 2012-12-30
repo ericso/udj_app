@@ -149,3 +149,100 @@ Song id: 1
 Song artist: Fun.
 Song title: Some Nights
 Song album: Some Nights
+start
+search text: fun
+escaped search text: fun
+database created
+Song id: 1
+Song artist: Fun.
+Song title: Some Nights
+Song album: Some Nights
+Song votes: 
+Song id: 2
+Song artist: Fun.
+Song title: We Are Young
+Song album: Some Nights
+Song votes: 
+---------------------------------
+start: song_find_by_id.php
+song id: 1
+escaped song id: 1
+database created
+Song id: 1
+Song artist: Fun.
+Song title: Some Nights
+Song album: Some Nights
+start
+search text: fun
+escaped search text: fun
+database created
+Song id: 1
+Song artist: Fun.
+Song title: Some Nights
+Song album: Some Nights
+Song votes: 
+Song id: 2
+Song artist: Fun.
+Song title: We Are Young
+Song album: Some Nights
+Song votes: 
+---------------------------------
+start: song_find_by_id.php
+song id: 2
+escaped song id: 2
+database created
+Song id: 2
+Song artist: Fun.
+Song title: We Are Young
+Song album: Some Nights
+start
+search text: fun
+escaped search text: fun
+database created
+Song id: 1
+Song artist: Fun.
+Song title: Some Nights
+Song album: Some Nights
+Song votes: 
+Song id: 2
+Song artist: Fun.
+Song title: We Are Young
+Song album: Some Nights
+Song votes: 
+start
+search text: fun
+escaped search text: fun
+database created
+Song id: 1
+Song artist: Fun.
+Song title: Some Nights
+Song album: Some Nights
+Song votes: 
+Song id: 2
+Song artist: Fun.
+Song title: We Are Young
+Song album: Some Nights
+Song votes: 
+start
+search text: fun
+escaped search text: fun
+database created
+Song id: 1
+Song artist: Fun.
+Song title: Some Nights
+Song album: Some Nights
+Song votes: 
+Song id: 2
+Song artist: Fun.
+Song title: We Are Young
+Song album: Some Nights
+Song votes: 
+---------------------------------
+start: song_find_by_id.php
+song id: 1
+escaped song id: 1
+database created
+Song id: 1
+Song artist: Fun.
+Song title: Some Nights
+Song album: Some Nights

@@ -33,6 +33,8 @@ function addSongToQueue(songId) {
 			dataType: 'json',
 			data: {"songId" : songId},
 			success: function(results) {
+				alert("song returned");
+				
 				if (results.length > 0) {
 					// Initialize the votes of the song to zero (need to make sure this is appropriate behavior)
 					results[0].stq_votes = 0;
