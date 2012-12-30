@@ -26,15 +26,16 @@ function addSongToQueue(songId) {
 	// Push the song onto the queue array if it isn't already there
 	if (findSongInQueue(songId)) {
 		upVote(songId);
+
+		// Switch to the queue tab
+		$('#queue_tab').trigger('click');
 	} else {
 		// Find the song in the database and push it onto the queue
 		$.ajax({
 			url: 'app/php/song_find_by_id.php',
 			dataType: 'json',
 			data: {"songId" : songId},
-			success: function(results) {
-				alert("song returned");
-				
+			success: function(results) {				
 				if (results.length > 0) {
 					// Initialize the votes of the song to zero (need to make sure this is appropriate behavior)
 					results[0].stq_votes = 0;
