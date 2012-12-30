@@ -1,4 +1,6 @@
 <?php
+/// Returns all the DJs from the Djs table ///
+/// Also returns the appropriate Venues and Queues ///
 
 /*** CREATE A LOG FILE ***/
 $logfile = "../../logs/dj.log";

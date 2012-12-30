@@ -1,4 +1,5 @@
 <?php
+/// This script is to be run initially to generate the database tables ///
 
 /*** CREATE A LOG FILE ***/
 $logfile = '../../logs/database.log';

@@ -1,5 +1,5 @@
 <?php
-// Saves the songs in the given queue to the database //
+/// Saves the songs in the given queue to the SongToQueue table ///
 
 /*** CREATE A LOG FILE ***/
 $logfile = '../../logs/queue.log';

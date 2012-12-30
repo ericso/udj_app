@@ -1,5 +1,5 @@
 <?php
-/// This script returns all the songs in the song database ///
+/// Returns all the songs form the Songs table ///
 
 /*** CREATE A LOG FILE ***/
 $logfile = '../../logs/songs.log';

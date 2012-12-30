@@ -1,5 +1,5 @@
 <?php
-// Returns the songs in the given queue //
+/// Returns the songs in the given queue ///
 
 /*** CREATE A LOG FILE ***/
 $logfile = '../../logs/queue.log';

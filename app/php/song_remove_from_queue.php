@@ -1,7 +1,8 @@
 <?php
+/// Remove a song from the SongToQueue table ///
 
 /*** CREATE A LOG FILE ***/
-$logfile = 'logs/songs.log';
+$logfile = '../../logs/songs.log';
 error_log("---------------------------------\n", 3, $logfile);
 error_log("start: song_remove_from_queue.php\n", 3, $logfile);
 

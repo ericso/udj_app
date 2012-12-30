@@ -1,4 +1,5 @@
 <?php
+/// Find a song using search text from the Songs table ///
 
 /*** CREATE A LOG FILE ***/
 $logfile = '../../logs/songs.log';
