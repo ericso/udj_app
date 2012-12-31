@@ -21,10 +21,14 @@ try {
 /*** READ DATA FROM DATABASE ***/
 $djarray = array();
 
+error_log("djarray created\n", 3, $logfile);
+
 // TODO: Modify this script so that it grabs the current venues and queues, and returns those along with the DJs
 
 /*** GRAB ALL ROWS FROM THE Djs TABLE ***/
 // $query = $database->query("SELECT * FROM Djs");
+
+error_log("about to query\n", 3, $logfile);
 
 $query = $database->query("SELECT d.dj_id, d.dj_name, d.dj_email, v.ve_id, v.ve_name, q.qu_id
                            FROM Djs AS d INNER JOIN QueueToDj AS qd
@@ -33,7 +37,14 @@ $query = $database->query("SELECT d.dj_id, d.dj_name, d.dj_email, v.ve_id, v.ve_
                            ON qv.qtv_queueId = q.qu_id JOIN Venues AS v
                            ON qv.qtv_venueId = v.ve_id;");
 
-while($row = $query->fetchArray()) {
+error_log("query finished\n", 3, $logfile);
+error_log("about to loop through query results\n", 3, $logfile);
+
+$counter = 0;
+error_log("Starting counter at: $counter \n", 3, $logfile);
+while($row = $query->fetchArray(SQLITE3_BOTH)) {
+  error_log("in loop: $counter \n", 3, $logfile);
+
   error_log("DJ id: " . $row['dj_id'] . "\n", 3, $logfile);
   error_log("DJ name: " . $row['dj_name'] . "\n", 3, $logfile);
   error_log("DJ email: " . $row['dj_email'] . "\n", 3, $logfile);
@@ -42,7 +53,11 @@ while($row = $query->fetchArray()) {
   error_log("Queue id: " . $row['qu_id'] . "\n", 3, $logfile);
   
   array_push($djarray, $row);
+
+  $counter++;
 }
+
+error_log("about to json encode and send results back\n", 3, $logfile);
 
 echo json_encode($djarray);
 
