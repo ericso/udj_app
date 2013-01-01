@@ -1,0 +1,6 @@
+[global]
+ApplicationName=udj_app
+AwsCredentialFile=E:\Users\eso\.elasticbeanstalk\aws_credential_file
+DevToolsEndpoint=git.elasticbeanstalk.us-east-1.amazonaws.com
+EnvironmentName=development
+Region=us-east-1
