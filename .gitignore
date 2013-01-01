@@ -7,3 +7,6 @@ databases/**/*
 
 #Log folder
 logs/**/*
+
+#Elasticbeanstalk directory
+*.elasticbeanstalk/**/*
