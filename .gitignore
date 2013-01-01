@@ -9,4 +9,4 @@ databases/**/*
 logs/**/*
 
 #Elasticbeanstalk directory
-*.elasticbeanstalk/**/*
+.elasticbeanstalk/
