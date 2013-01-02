@@ -18,8 +18,25 @@ try {
 }
 
 
+/*** CREATE THE Uesrs TABLE ***/
+$query = 'CREATE TABLE IF NOT EXISTS Users ' .
+         '(user_id INTEGER (11) NOT NULL, ' .
+         'user_name TEXT (50) NOT NULL UNIQUE, ' .
+         'user_email TEXT (50) NOT NULL, ' .
+         'user_password TEXT (50) NOT NULL, ' .
+         'user_join_date DATETIME NOT NULL, ' .
+         'PRIMARY KEY (user_id));';
+
+if (!$database->exec($query)) {
+  error_log("error: $error\n", 3, $logfile);
+  die($error);
+}
+
+error_log("Users table created\n", 3, $logfile);
+
+
 /*** CREATE THE Djs TABLE ***/
-$query = 'CREATE TABLE Djs ' .
+$query = 'CREATE TABLE IF NOT EXISTS Djs ' .
          '(dj_id INTEGER, dj_name TEXT, dj_email TEXT, PRIMARY KEY (dj_id));';
 
 if (!$database->exec($query)) {
@@ -53,7 +70,7 @@ if (!$database->exec($query)) {
 
 
 /*** CREATE THE Songs TABLE ***/
-$query = 'CREATE TABLE Songs ' .
+$query = 'CREATE TABLE IF NOT EXISTS Songs ' .
          '(so_id INTEGER, so_artist TEXT, so_title TEXT, so_album TEXT, PRIMARY KEY (so_id));';
 
 if (!$database->exec($query)) {
@@ -86,7 +103,7 @@ if (!$database->exec($query)) {
 }
 
 /*** CREATE THE Venues TABLE ***/
-$query = 'CREATE TABLE Venues ' .
+$query = 'CREATE TABLE IF NOT EXISTS Venues ' .
          '(ve_id INTEGER, ve_name TEXT, PRIMARY KEY (ve_id));';
 
 if (!$database->exec($query)) {
@@ -119,7 +136,7 @@ if (!$database->exec($query)) {
 }
 
 /*** CREATE THE Queues TABLE ***/
-$query = 'CREATE TABLE Queues ' .
+$query = 'CREATE TABLE IF NOT EXISTS Queues ' .
          '(qu_id INTEGER, PRIMARY KEY (qu_id));';
 // Will add 'date INTEGER' to the Queues table later
 
@@ -158,7 +175,7 @@ if (!$database->exec($query)) {
 // These tables relate Queues to Djs, and Songs to Queues
 
 /*** CREATE THE QueueToDj TABLE ***/
-$query = 'CREATE TABLE QueueToDj ' .
+$query = 'CREATE TABLE IF NOT EXISTS QueueToDj ' .
          '(qtd_queueId INTEGER, qtd_djId INTEGER, PRIMARY KEY (qtd_queueId, qtd_djId));';
 
 if (!$database->exec($query)) {
@@ -192,7 +209,7 @@ if (!$database->exec($query)) {
 }
 
 /*** CREATE THE QueueToVenue TABLE ***/
-$query = 'CREATE TABLE QueueToVenue ' .
+$query = 'CREATE TABLE IF NOT EXISTS QueueToVenue ' .
          '(qtv_queueId INTEGER, qtv_venueId INTEGER, PRIMARY KEY (qtv_queueId, qtv_venueId));';
 
 if (!$database->exec($query)) {
@@ -227,7 +244,7 @@ if (!$database->exec($query)) {
 
 
 /*** CREATE THE SongToQueue TABLE ***/
-$query = 'CREATE TABLE SongToQueue ' .
+$query = 'CREATE TABLE IF NOT EXISTS SongToQueue ' .
          '(stq_songId INTEGER, stq_queueId INTEGER, stq_votes INTEGER, PRIMARY KEY (stq_songId, stq_queueId));';
 
 if (!$database->exec($query)) {

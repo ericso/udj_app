@@ -91,27 +91,22 @@ function setupApp() {
 
 	$(document).ready( function() {
 		// CREATE DATABASES
-		// FIX: For now, this is to be run initially and then commented out 
-		// $.ajax({
-		// 	url: 'app/php/create_db.php',
-		// 	dataType: 'json',
-		// 	success: function() {			
-		// 		alert("Database created");
-		// 	},
-		// 	error: function(request, status, error) {
-		// 		if (debug){
-		// 			alert('Got an error: ' + request.responseText + " status: "+ status + " error: " + error);
-		// 		}
-		// 	}
-		// });
-
-		//queueTabSwitchTimeout = setTimeout(function () { $('#queue_tab').trigger('click'); }, 2000);
-
-		// Populate the DJ list
-		populateDjs();
-
+		$.ajax({
+			url: 'app/php/create_db.php',
+			dataType: 'json',
+			success: function() {
+				// Populate the DJ list
+				populateDjs();
+			},
+			error: function(request, status, error) {
+				if (debug){
+					alert('Got an error: ' + request.responseText + " status: "+ status + " error: " + error);
+				}
+			}
+		});
+		
 		// Set the list of active DJs FIX: need to pull this from a database
-		activeDjs = [];
+		//activeDjs = [];
 	});
 	
 }

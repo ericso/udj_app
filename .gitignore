@@ -2,11 +2,8 @@
 [Tt]humbs.db
 *.DS_Store
 
-#databases folder and all subsequent directories and files
-databases/**/*
-
 #Log folder
-logs/**/*
+logs/
 
 #Elasticbeanstalk directory
 .elasticbeanstalk/
