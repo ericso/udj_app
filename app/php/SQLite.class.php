@@ -1,26 +1,18 @@
 <?php
-// DB.class.php
-// This class handles database connections for SQLite3 databases using the OOP style
+// SQLite.class.php
+// This class handles database connections for SQLite3 databases
 
-class DB {  
-  
+class SQLite {  
     protected $db_name = 'request.sqlite';
     protected $db_path = '../../databases/';
-    // protected $db_user = 'databaseusername';
-    // protected $db_pass = 'databasepassword';
-    // protected $db_host = 'localhost';
-
 
     //open a connection to the database. Make sure this is called
     //on every page that needs to use the database.
     public function connect() {
         try {
             // Create or open the database
-            $database = new SQLite3($this->db_path . $this->db_name);
-            error_log("database created\n", 3, $logfile);
+            $db = new SQLite3($this->db_path . $this->db_name);
         } catch (Exception $e) {
-            error_log("error: $e\n", 3, $logfile);
-            error_log("error: $error\n", 3, $logfile);
             die ($error);
         }
         return true;
@@ -58,7 +50,7 @@ class DB {
         }
 
         $sql = "SELECT $columns FROM $table WHERE $where";  
-        $result = $database->query($sql);
+        $result = $db->query($sql);
 
         if ($result->numRows() == 1) {
             return $this->processRowSet($result, true);  
@@ -74,7 +66,7 @@ class DB {
     public function update($data, $table, $where) {
         foreach ($data as $column => $value) {
             $sql = "UPDATE $table SET $column = $value WHERE $where";
-            $database->query($sql) or die($database->lastErrorMsg());
+            $db->query($sql) or die($db->lastErrorMsg());
         }
         return true;
     }
@@ -96,7 +88,7 @@ class DB {
   
         $sql = "INSERT INTO $table ($columns) VALUES ($values)";
   
-        $database->query($sql) or die($database->lastErrorMsg());
+        $db->query($sql) or die($db->lastErrorMsg());
   
         //return the ID of the user in the database.  
         return lastInsertRowID();
@@ -108,15 +100,15 @@ class DB {
     public function remove($table, $where) {
         foreach ($data as $column => $value) {
             $sql = "DELETE FROM $table WHERE $where";
-            $database->query($sql) or die($database->lastErrorMsg());
+            $db->query($sql) or die($db->lastErrorMsg());
         }
         return true;
     }
 
     // Sends a generic query to the database.
     // takes a query string and executes it
-    public function select($query_text) { 
-        $result = $database->query($query_text);
+    public function select($query_text) {
+        $result = $db->query($query_text);
         if ($result->numRows() == 1) {
             return $this->processRowSet($result, true);  
         } else {
