@@ -23,7 +23,7 @@ class SQLite {
     // true, then it will return a single row instead of an array of rows.  
     public function processRowSet($rowSet, $singleRow=false) {  
         $resultArray = array();  
-        while ($row = $rowSet->fetchArray*()) {  
+        while ($row = $rowSet->fetchArray()) {  
             array_push($resultArray, $row);  
         }  
   
@@ -38,7 +38,7 @@ class SQLite {
     // returns a full row or rows from $table using $where as the where clause.  
     // return value is an associative array with column names as keys.  
     public function select($table, $where, $data='*') {
-        if ($data === '*') {
+        if ($data == '*') {
             $columns = '*';
         } else {
             $columns = "";

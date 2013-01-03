@@ -1,7 +1,7 @@
 <?php
 // User.class.php
   
-require_once 'DB.class.php';
+require_once 'SQLite.class.php';
 
 class User {
     public $id;
@@ -11,7 +11,7 @@ class User {
     public $joinDate;
   
     // Constructor is called whenever a new object is created.
-    // Takes an associative array with the DB row as an argument.
+    // Takes an associative array with the SQLite row as an argument.
     function __construct($data) {
         $this->id = (isset($data['id'])) ? $data['id'] : "";
         $this->username = (isset($data['username'])) ? $data['username'] : "";
