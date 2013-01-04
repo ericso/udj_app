@@ -1,4 +1,9 @@
+<?php
+	require_once 'includes/global.inc.php';
+?>
+
 <!doctype html>
+
 <html>
 <head>
 	<meta charset="utf-8">
@@ -35,6 +40,10 @@
 </head>
 
 <body onload="setupApp()">
+	<?php if (isset($_SESSION['logged_in'])) : ?>
+		<?php $user = unserialize($_SESSION['user']); ?>
+	<?php endif; ?>
+
 	<!-- responsive layout for phone devices -->
 	<div class="container-fluid">
 		<nav class="row-fluid ">
