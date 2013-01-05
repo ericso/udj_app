@@ -2,18 +2,31 @@
 // SQLite.class.php
 // This class handles database connections for SQLite3 databases
 
-class SQLite {  
-    protected $db_name = 'request.sqlite';
-    protected $db_path = '../../databases/';
+require_once 'Logger.class.php';
+
+class SQLite {
+    protected $db_name;
+    protected $db_path;
+
+    function __construct($name) {
+        $this->db_name = $name;
+        $this->db_path = __DIR__ . '/../../../databases/';
+    }
 
     //open a connection to the database. Make sure this is called
     //on every page that needs to use the database.
     public function connect() {
+        // create a logger
+        $logger = new Logger('php.log');
+
         try {
             // Create or open the database
+            $logger->log('about to connect to the database: ' . $this->db_path . $this->db_name, 3);
             $db = new SQLite3($this->db_path . $this->db_name);
+            $logger->log('Successfully connected to the database', 3);
         } catch (Exception $e) {
-            die ($error);
+            $logger->log('Database connection unsuccessful', 3);
+            die();
         }
         return true;
     }
@@ -107,7 +120,7 @@ class SQLite {
 
     // Sends a generic query to the database.
     // takes a query string and executes it
-    public function select($query_text) {
+    public function query($query_text) {
         $result = $db->query($query_text);
         if ($result->numRows() == 1) {
             return $this->processRowSet($result, true);  

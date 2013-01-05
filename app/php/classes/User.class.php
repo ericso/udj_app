@@ -18,8 +18,8 @@ class User {
         $this->hashedPassword = (isset($data['password'])) ? $data['password'] : "";
         $this->email = (isset($data['email'])) ? $data['email'] : "";
         $this->joinDate = (isset($data['join_date'])) ? $data['join_date'] : "";
-    }  
-  
+    }
+    
     public function save($isNewUser = false) {
         // create a new database object.
         $db = new SQLite();

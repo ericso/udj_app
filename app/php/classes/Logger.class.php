@@ -1,12 +1,20 @@
 <?php
 // Logger.class.php
+// this class handlings writing to logs
 
-require_once 'SQLite.class.php';
+class Logger {
+	// the path to the log directory and files
+	protected $log_directory;
+    protected $log_file;
 
-class User {
-	protected $log_directory = '../../logs/';
-    protected $log_file = $log_directory . 'database.log';
+    function __construct($file) {
+    	$this->log_directory = __DIR__ . "/../../../logs/";
+    	$this->log_file = $this->log_directory . $file;
+    }
 
-	error_log("---------------------------------\n", 3, $logfile);
-	error_log("start: create_db.php\n", 3, $logfile);
+    public function log($data, $level) {
+		error_log($data . " \n", $level, $this->log_file);
+    }
 }
+
+?>

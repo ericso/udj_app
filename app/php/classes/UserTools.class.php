@@ -38,7 +38,7 @@ class UserTools {
     // Check to see if a username exists.
     // This is called during registration to make sure all user names are unique.
     public function checkUsernameExists($username) {
-        $result = select('Users', "username = '$username'", 'id')
+        $result = select('Users', "username = '$username'", 'id');
         
         if (count($result) == 0) {
             return false;

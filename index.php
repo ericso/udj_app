@@ -1,8 +1,7 @@
 <?php
-	//require_once 'app/php/includes/global.inc.php';
+	require_once(dirname(__FILE__) . '/app/php/includes/global.inc.php');
 
 	// login code
-	  
 	$error = "";
 	$username = "";
 	$password = "";
@@ -17,11 +16,11 @@
 	    if ($userTools->login($username, $password)) {
 	        // successful login, redirect them to a page
 	        header("Location: index.php");
-	    } else{
+	    } else {
 	        $error = "Incorrect username or password. Please try again.";
+	        $logger->log("Incorrect username or password. Please try again.");
 	    }
 	}
-
 ?>
 
 <!doctype html>
