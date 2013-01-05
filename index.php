@@ -1,5 +1,27 @@
 <?php
-	require_once 'includes/global.inc.php';
+	//require_once 'app/php/includes/global.inc.php';
+
+	// login code
+	  
+	$error = "";
+	$username = "";
+	$password = "";
+
+	// check to see if they've submitted the login form
+	if (isset($_POST['submit-login'])) {
+
+	    $username = $_POST['username'];
+	    $password = $_POST['password'];
+
+	    $userTools = new UserTools();
+	    if ($userTools->login($username, $password)) {
+	        // successful login, redirect them to a page
+	        header("Location: index.php");
+	    } else{
+	        $error = "Incorrect username or password. Please try again.";
+	    }
+	}
+
 ?>
 
 <!doctype html>
@@ -40,6 +62,7 @@
 </head>
 
 <body onload="setupApp()">
+	<!-- PHP check to see if user is logged in -->
 	<?php if (isset($_SESSION['logged_in'])) : ?>
 		<?php $user = unserialize($_SESSION['user']); ?>
 	<?php endif; ?>
@@ -69,6 +92,12 @@
 	  							<li id="search_tab" class="pull-right"><a href="javascript:void(0)"><strong>Results  </strong><span class="icon-search"></span></a></li>
     							<li id="help_tab" class="pull-right"><a href="javascript:void(0)"><strong>Help  </strong><span class="icon-question-sign"></span></a></li>
 	  							<li id="share_tab" class="pull-right"><a href="javascript:void(0)"><strong>Share  </strong><span class="icon-share"></span></a></li>
+	  							<!-- PHP if the user isn't logged in, display login link -->
+	  							<?php if (!isset($_SESSION['logged_in'])) : ?>
+	  								<?php echo '<li id="login_tab" class="pull-right"><a href="javascript:void(0)"><strong>Login  </strong><span class="icon-user"></span></a></li>' ?>
+	  							<?php else : ?>
+	  								<?php echo '<li id="logout_tab" class="pull-right"><a href="javascript:void(0)"><strong>Logout  </strong><span class="icon-user"></span></a></li>' ?>
+	  							<?php endif; ?>
     						</ul>
  						</li>
 					</ul>
@@ -159,6 +188,24 @@
 				<ul class="nav nav-tabs nav-stacked" style="text-align:center">
 					<li><a href="">Contact Us</a></li>
 				</ul>
+			</section>
+		</div>
+
+		<div id="login_tab_div" class="row-fluid " style="display: none;">
+			<div class="row-fluid ">
+				<h3>ReQuest <small><span> </span>Login</small></h3>
+			</div>
+			<section class="row-fluid ">
+				<?php
+					if ($error != "") {
+					    echo $error."<br/>";
+					}
+				?>
+		    <form action="index.php" method="post">
+		        Username: <input type="text" name="username" value="<?php echo $username; ?>" /><br/>
+		        Password: <input type="password" name="password" value="<?php echo $password; ?>" /><br/>
+		        <input type="submit" value="Login" name="submit-login" />
+		    </form>
 			</section>
 		</div>
 

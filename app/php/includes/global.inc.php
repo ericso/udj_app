@@ -1,8 +1,8 @@
 <?php
 
-require_once 'classes/User.class.php';
-require_once 'classes/UserTools.class.php';
-require_once 'classes/SQLite.class.php';
+require_once './../classes/User.class.php';
+require_once '../classes/UserTools.class.php';
+require_once '../classes/SQLite.class.php';
 
 // connect to the database
 $db = new SQLite();

@@ -65,7 +65,6 @@ function setupApp() {
 		// Find the currently active tab and switch the tab
 		var activeTab = $('#nav_bar .active');
 		switchTab(activeTab.attr('id'), 'help_tab');
-
 	});
 	$('#share_tab').click( function() {
 		// Cancel timeout
@@ -76,8 +75,18 @@ function setupApp() {
 		// Find the currently active tab and switch the tab
 		var activeTab = $('#nav_bar .active');
 		switchTab(activeTab.attr('id'), 'share_tab');
-
 	});
+	$('#login_tab').click( function() {
+		// Cancel timeout
+		if (queueTabSwitchTimeout) {
+			clearTimeout(queueTabSwitchTimeout);
+		}
+		
+		// Find the currently active tab and switch the tab
+		var activeTab = $('#nav_bar .active');
+		switchTab(activeTab.attr('id'), 'login_tab');
+	});
+
 
 	/*** Searching for songs event handlers ***/
 	//$('#song_search_button').click ( function() { findSongHandler() });
