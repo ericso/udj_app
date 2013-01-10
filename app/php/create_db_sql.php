@@ -1,4 +1,5 @@
 <?php
+// create_db_sql.php
 // This script is to be run initially to generate the database tables
 
 /*** CREATE A LOG FILE ***/

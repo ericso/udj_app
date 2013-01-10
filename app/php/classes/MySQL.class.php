@@ -5,11 +5,18 @@
 require_once 'Logger.class.php';
 
 class MySQL {  
-    protected $db_name = 'requestdb';  
-    protected $db_user = 'requestuser';  
-    protected $db_pass = 'R66teeeeeeeeeeeeeee';  
-    protected $db_host = 'localhost';  
-  
+    protected $db_name;
+    protected $db_user;
+    protected $db_pass;
+    protected $db_host;
+
+    function __construct($name, $user, $pass, $host='localhost') {
+        $this->db_name = $name;
+        $this->$db_user = $user;
+        $this->$db_pass = $pass;
+        $this->$db_host = $host;
+    }
+    
     //open a connection to the database. Make sure this is called  
     //on every page that needs to use the database. 
     public function connect() {
