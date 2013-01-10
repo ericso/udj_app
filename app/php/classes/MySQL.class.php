@@ -1,88 +1,123 @@
 <?php  
 // MySQL.class.php
-// This class handles database connections for SQLite3 databases
-  
+// This class handles database connections for MySQL databases
+
+require_once 'Logger.class.php';
+
 class MySQL {  
-    protected $db_name = 'yourdatabasename';  
-    protected $db_user = 'databaseusername';  
-    protected $db_pass = 'databasepassword';  
+    protected $db_name = 'requestdb';  
+    protected $db_user = 'requestuser';  
+    protected $db_pass = 'R66teeeeeeeeeeeeeee';  
     protected $db_host = 'localhost';  
   
     //open a connection to the database. Make sure this is called  
-    //on every page that needs to use the database.  
-    public function connect() {  
+    //on every page that needs to use the database. 
+    public function connect() {
+         // create a logger
+        $logger = new Logger('mysql.log');
+
         $connection = mysql_connect($this->db_host, $this->db_user, $this->db_pass);  
-        mysql_select_db($this->db_name);  
-  
+        mysql_select_db($this->db_name);
+
         return true;  
     }  
   
-    //takes a mysql row set and returns an associative array, where the keys  
-    //in the array are the column names in the row set. If singleRow is set to  
-    //true, then it will return a single row instead of an array of rows.  
+    // takes a mysql row set and returns an associative array, where the keys  
+    // in the array are the column names in the row set. If singleRow is set to  
+    // true, then it will return a single row instead of an array of rows.  
     public function processRowSet($rowSet, $singleRow=false)  
     {  
         $resultArray = array();  
-        while($row = mysql_fetch_assoc($rowSet))  
-        {  
-            array_push($resultArray, $row);  
-        }  
+        while ($row = mysql_fetch_assoc($rowSet)) {
+            array_push($resultArray, $row);
+        }
   
-        if($singleRow === true)  
-            return $resultArray[0];  
-  
+        if ($singleRow === true) {
+            return $resultArray[0];
+        }
         return $resultArray;  
     }  
   
-    //Select rows from the database.  
-    //returns a full row or rows from $table using $where as the where clause.  
-    //return value is an associative array with column names as keys.  
-    public function select($table, $where) {  
-        $sql = "SELECT * FROM $table WHERE $where";  
-        $result = mysql_query($sql);  
-        if(mysql_num_rows($result) == 1)  
-            return $this->processRowSet($result, true);  
-  
-        return $this->processRowSet($result);  
-    }  
-  
-    //Updates a current row in the database.  
-    //takes an array of data, where the keys in the array are the column names  
-    //and the values are the data that will be inserted into those columns.  
-    //$table is the name of the table and $where is the sql where clause.  
-    public function update($data, $table, $where) {  
-        foreach ($data as $column => $value) {  
-            $sql = "UPDATE $table SET $column = $value WHERE $where";  
-            mysql_query($sql) or die(mysql_error());  
-        }  
-        return true;  
-    }  
-  
-    //Inserts a new row into the database.  
-    //takes an array of data, where the keys in the array are the column names  
-    //and the values are the data that will be inserted into those columns.  
-    //$table is the name of the table.  
-    public function insert($data, $table) {  
-  
-        $columns = "";  
-        $values = "";  
-  
-        foreach ($data as $column => $value) {  
-            $columns .= ($columns == "") ? "" : ", ";  
-            $columns .= $column;  
-            $values .= ($values == "") ? "" : ", ";  
-            $values .= $value;  
-        }  
-  
-        $sql = "insert into $table ($columns) values ($values)";  
-  
-        mysql_query($sql) or die(mysql_error());  
-  
-        //return the ID of the user in the database.  
-        return mysql_insert_id();  
-  
+    // Select rows from the database.  
+    // returns a full row or rows from $table using $where as the where clause.  
+    // return value is an associative array with column names as keys.  
+    public function select($table, $where, $data='*') {
+        if ($data == '*') {
+            $columns = '*';
+        } else {
+            $columns = "";
+
+            foreach ($data as $column) {
+                $columns .= ($columns == "") ? "" : ", ";
+                $columns .= $column;
+            }
+        }
+
+        $sql = "SELECT $columns FROM $table WHERE $where";
+        $result = mysql_query($sql);
+
+        if (mysql_num_rows($result) == 1) {
+            return $this->processRowSet($result, true);
+        }
+        return $this->processRowSet($result);
     }
+
+    // Updates a current row in the database.  
+    // takes an array of data, where the keys in the array are the column names  
+    // and the values are the data that will be inserted into those columns.  
+    // $table is the name of the table and $where is the sql where clause.
+    public function update($data, $table, $where) {
+        foreach ($data as $column => $value) {
+            $sql = "UPDATE $table SET $column = $value WHERE $where";  
+            mysql_query($sql) or die(mysql_error());
+        }
+        return true;
+    }  
   
+    // Inserts a new row into the database.  
+    // takes an array of data, where the keys in the array are the column names  
+    // and the values are the data that will be inserted into those columns.  
+    // $table is the name of the table.  
+    public function insert($data, $table) {
+        $columns = "";
+        $values = "";
+
+        foreach ($data as $column => $value) {
+            $columns .= ($columns == "") ? "" : ", ";
+            $columns .= $column;
+            $values .= ($values == "") ? "" : ", ";
+            $values .= $value;
+        }
+
+        $sql = "INSERT INTO $table ($columns) VALUES ($values)";
+
+        mysql_query($sql) or die(mysql_error());
+
+        // return the ID of the user in the database.  
+        return mysql_insert_id();
+    }
+
+    // Removes a row in the database.
+    // Takes a table and a where clause and removes the row(s) matching
+    // $table is the name of the table and $where is the sql where clause.
+    public function remove($table, $where) {
+        foreach ($data as $column => $value) {
+            $sql = "DELETE FROM $table WHERE $where";
+            mysql_query($sql) or die(mysql_error());
+        }
+        return true;
+    }
+
+    // Sends a generic query to the database.
+    // takes a query string and executes it
+    public function query($query_text) {
+        // TODO: clean query text
+        $result = mysql_query($query_text);
+        if (mysql_num_rows($result) == 1) {
+            return $this->processRowSet($result, true);  
+        }
+        return $this->processRowSet($result);        
+    }
 }
   
 ?>

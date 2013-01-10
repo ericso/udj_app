@@ -34,7 +34,6 @@ while($row = $query->fetchArray()) {
   error_log("Song artist: " . $row['so_artist'] . "\n", 3, $logfile);
   error_log("Song title: " . $row['so_title'] . "\n", 3, $logfile);
   error_log("Song album: " . $row['so_album'] . "\n", 3, $logfile);
-  error_log("Song votes: " . $row['so_votes'] . "\n", 3, $logfile);
   array_push($songArray, $row);
 }
 
