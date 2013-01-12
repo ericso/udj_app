@@ -10,7 +10,9 @@
 	if (isset($_POST['submit-login'])) {
 
 	    $username = $_POST['username'];
-	    $password = $_POST['password'];
+	    $password = $_POST['password'];	
+
+	    $logger->log('username: ' . $username);
 
 	    $userTools = new UserTools();
 	    if ($userTools->login($username, $password)) {
@@ -18,7 +20,7 @@
 	        header("Location: index.php");
 	    } else {
 	        $error = "Incorrect username or password. Please try again.";
-	        $logger->log("Incorrect username or password. Please try again.");
+	        $logger->log("Incorrect username or password. Please try again.", 3);
 	    }
 	}
 ?>
@@ -84,6 +86,38 @@
 							</div>
 						</li> <!-- This icon could be an advanced search feature or used as the search "button" -->
 	  					<li class="divider-vertical"></li>
+				        
+	  					<!-- PHP if the user isn't logged in, display login link -->
+						<?php if (!isset($_SESSION['logged_in'])):
+								$logger->log('session is not set', 3);
+								$display_login_style = "display: block;";
+								$display_logout_style = "display: none;";
+							else:
+								$logger->log('session is set', 3);
+								$logger->log('username: ' . $user->username, 3);
+								$display_login_style = "display: none;";
+								$display_logout_style = "display: block;";
+							endif;
+						?>
+				        <li class="dropdown" style="<?php echo $display_login_style; ?>">
+				        	<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+				        	<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+								<section class="row-fluid ">
+							    <form action="index.php" method="post">
+							        Username: <input type="text" name="username" value="" /><br/>
+							        Password: <input type="password" name="password" value="" /><br/>
+							        <input type="submit" value="Login" name="submit-login" class="btn btn-primary" />
+							        <input id="signup_btn" value="Register" name="submit-signup" class="btn btn-success" />
+							    </form>
+								</section>
+				            </div>
+				        </li>
+
+				        <li class="" style="<?php echo $display_logout_style; ?>">
+				        	<a href="logout.php"><?php echo $user->username; ?></a>
+				        </li>
+
+	  					<li class="divider-vertical"></li>
   						<li class="dropdown">
     						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="icon-align-justify"></span></a>
     						<ul class="dropdown-menu">
@@ -91,12 +125,7 @@
 	  							<li id="search_tab" class="pull-right"><a href="javascript:void(0)"><strong>Results  </strong><span class="icon-search"></span></a></li>
     							<li id="help_tab" class="pull-right"><a href="javascript:void(0)"><strong>Help  </strong><span class="icon-question-sign"></span></a></li>
 	  							<li id="share_tab" class="pull-right"><a href="javascript:void(0)"><strong>Share  </strong><span class="icon-share"></span></a></li>
-	  							<!-- PHP if the user isn't logged in, display login link -->
-	  							<?php if (!isset($_SESSION['logged_in'])) : ?>
-	  								<?php echo '<li id="login_tab" class="pull-right"><a href="javascript:void(0)"><strong>Login  </strong><span class="icon-user"></span></a></li>' ?>
-	  							<?php else : ?>
-	  								<?php echo '<li id="logout_tab" class="pull-right"><a href="javascript:void(0)"><strong>Logout  </strong><span class="icon-user"></span></a></li>' ?>
-	  							<?php endif; ?>
+	  							
     						</ul>
  						</li>
 					</ul>
@@ -187,24 +216,6 @@
 				<ul class="nav nav-tabs nav-stacked" style="text-align:center">
 					<li><a href="">Contact Us</a></li>
 				</ul>
-			</section>
-		</div>
-
-		<div id="login_tab_div" class="row-fluid " style="display: none;">
-			<div class="row-fluid ">
-				<h3>ReQuest <small><span> </span>Login</small></h3>
-			</div>
-			<section class="row-fluid ">
-				<?php
-					if ($error != "") {
-					    echo $error."<br/>";
-					}
-				?>
-		    <form action="index.php" method="post">
-		        Username: <input type="text" name="username" value="<?php echo $username; ?>" /><br/>
-		        Password: <input type="password" name="password" value="<?php echo $password; ?>" /><br/>
-		        <input type="submit" value="Login" name="submit-login" />
-		    </form>
 			</section>
 		</div>
 

@@ -48,7 +48,8 @@ class SQLite {
     }
 
     // Select rows from the database. 
-    // returns a full row or rows from $table using $where as the where clause.  
+    // returns a full row or rows from $table using $where as the where clause
+    // and optional $data is/are the column(s)
     // return value is an associative array with column names as keys.  
     public function select($table, $where, $data='*') {
         if ($data == '*') {

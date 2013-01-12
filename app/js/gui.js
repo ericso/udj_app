@@ -87,6 +87,11 @@ function setupApp() {
 		switchTab(activeTab.attr('id'), 'login_tab');
 	});
 
+	// signup and signin handlers
+	$('#signup_btn').click( function() {
+		alert('clicked!');
+		window.location.href = 'register.php';
+	});
 
 	/*** Searching for songs event handlers ***/
 	//$('#song_search_button').click ( function() { findSongHandler() });
@@ -100,19 +105,19 @@ function setupApp() {
 
 	$(document).ready( function() {
 		// CREATE DATABASES
-		$.ajax({
-			url: 'app/php/create_db.php',
-			dataType: 'json',
-			success: function() {
-				// Populate the DJ list
-				populateDjs();
-			},
-			error: function(request, status, error) {
-				if (debug){
-					alert('Got an error: ' + request.responseText + " status: "+ status + " error: " + error);
-				}
-			}
-		});
+		// $.ajax({
+		// 	url: 'app/php/create_db.php',
+		// 	dataType: 'json',
+		// 	success: function() {
+		// 		// Populate the DJ list
+		// 		populateDjs();
+		// 	},
+		// 	error: function(request, status, error) {
+		// 		if (debug){
+		// 			alert('Got an error: ' + request.responseText + " status: "+ status + " error: " + error);
+		// 		}
+		// 	}
+		// });
 		
 		// Set the list of active DJs FIX: need to pull this from a database
 		//activeDjs = [];
@@ -136,7 +141,6 @@ function switchTab(fromTab, toTab) {
 		$('#' + toTab).addClass('active');
 	}
 }
-
 
 /*** Generate Bootstrap alert box ***/
 function newAlert(type, message) {

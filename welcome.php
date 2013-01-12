@@ -1,11 +1,11 @@
 <?php  
 //welcome.php  
   
-require_once 'includes/global.inc.php';  
+require_once 'app/php/includes/global.inc.php';  
   
 //check to see if they're logged in  
 if(!isset($_SESSION['logged_in'])) { 
-    header("Location: login.php"); 
+    //header("Location: login.php"); 
 } 
  
 //get the user object from the session 

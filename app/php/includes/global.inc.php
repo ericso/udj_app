@@ -10,19 +10,19 @@ require_once(dirname(__FILE__) . '/../classes/Logger.class.php');
 // create a logger
 $logger = new Logger('php.log');
 
-// connect to the database, pass in the name of the database
-$db = new SQLite('request.sqlite');
-$db->connect();
-
-// $db = new MySQL('requestdb', 'requestuser', 'R66teeeeeeeeeeeeeee', 'localhost');
+// connect to the SQLite database
+// $db = new SQLite('request.sqlite');
 // $db->connect();
+
+// connect to the MySQL database
+$db = new MySQL('request', 'requestuser', 'R66teeeeeeeeeeeeeee', 'localhost');
+$db->connect();
 
 // initialize UserTools object
 $userTools = new UserTools();
 
 // start the session
 session_start();
-$logger->log("Session started", 3);
 
 // refresh session variables if logged in
 if (isset($_SESSION['logged_in'])) {
