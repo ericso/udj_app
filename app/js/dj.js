@@ -75,7 +75,7 @@ function selectDj(djId, queueId) {
 			}
 		});
 	}
-
+	
 	currentDj = findDjById(djId); // Set the current DJ by id
 	currentQueueId = queueId; // Set the current queue id
 

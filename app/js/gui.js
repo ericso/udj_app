@@ -121,6 +121,9 @@ function setupApp() {
 		
 		// Set the list of active DJs FIX: need to pull this from a database
 		//activeDjs = [];
+
+		// populate the DJ list
+		populateDjs();
 	});
 	
 }

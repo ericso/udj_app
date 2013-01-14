@@ -63,12 +63,14 @@ function findSongs(searchText, foundSongs) {
 
 // Find a song in the queue array by id
 function findSongInQueue(songId) {
-	return $.grep(queueSongs, function(e) { return e.so_id === songId; })[0];
+	return $.grep(queueSongs, function(e) { return parseInt(e.so_id) === parseInt(songId); })[0];
 }
 
 // Find a DJ in the database by id
 function findDjById(djId) {
-	return $.grep(allDjs, function(e) { return e.dj_id === djId; })[0];
+
+	var foundDj = $.grep(allDjs, function(e) { return parseInt(e.dj_id) === parseInt(djId); })[0];
+	return foundDj;
 }
 
 // Find a DJ in the active DJ array by id

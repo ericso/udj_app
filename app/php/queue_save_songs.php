@@ -1,28 +1,19 @@
 <?php
-/// Saves the songs in the given queue to the SongToQueue table ///
+// queue_save_songs.php
+// Saves the songs in the given queue to the SongToQueue table
 
-/*** CREATE A LOG FILE ***/
-$logfile = '../../logs/queue.log';
-error_log("---------------------------------\n", 3, $logfile);
-error_log("start: queue_save_songs.php\n", 3, $logfile);
+require_once(dirname(__FILE__) . '/includes/global.inc.php');
+
+$logger->log("---------------------------------", 3);
+$logger->log("start: dj_return_all.php", 3);
 
 $songsToSaveArr = $_GET["songsToSaveArr"];
 // [{ songid, queueid, votes }, ...]
 
-/*** OPEN THE DATABASE ***/
-try {
-  // Create or open the database
-  $database = new SQLite3('../../databases/request.sqlite');
-  error_log("database created\n", 3, $logfile);
-} catch(Exception $e) {
-  error_log("error: $e\n", 3, $logfile);
-  error_log("error: $error\n", 3, $logfile);
-  die ($error);
-}
 
 // What is in the passed in array?
-error_log("----------- Parameter Introspection -----------\n", 3, $logfile);
-error_log("songsToSaveArr length: " . count($songsToSaveArr) . "\n", 3, $logfile);
+error_log("----------- Parameter Introspection -----------", 3);
+error_log("songsToSaveArr length: " . count($songsToSaveArr), 3);
 
 /*** WRITE DATA TO THE DATABASE ***/
 
@@ -33,15 +24,15 @@ foreach ($songsToSaveArr as $song) {
   $queue_id = $song["stq_queueId"];
   $votes = $song["stq_votes"];
 
-  error_log("----------- SAVING SONG $counter -----------\n", 3, $logfile);
-  error_log("Song id: " . $song_id . "\n", 3, $logfile);
-  error_log("Queue id: " . $queue_id . "\n", 3, $logfile);
-  error_log("Number of votes: " . $votes . "\n", 3, $logfile);
+  error_log("----------- SAVING SONG $counter -----------", 3);
+  error_log("Song id: " . $song_id, 3);
+  error_log("Queue id: " . $queue_id, 3);
+  error_log("Number of votes: " . $votes, 3);
 
   // $query = $database->query("INSERT INTO SongToQueue (stq_songId, stq_queueId, stq_votes)
   //                            VALUES ('$song_id', '$queue_id', '$votes');");
   
-  $query = $database->query("INSERT OR REPLACE INTO SongToQueue (stq_songId, stq_queueId, stq_votes) 
+  $query = $db->query("INSERT OR REPLACE INTO SongToQueue (stq_songId, stq_queueId, stq_votes) 
                              VALUES ('$song_id', '$queue_id', '$votes');");
 
   // if (!$database->exec($query)) {

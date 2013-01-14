@@ -76,7 +76,7 @@ class MySQL {
         if ($result == false) {
             return false;
         }
-        
+
         if (mysql_num_rows($result) == 1) {
             $this->logger->log('MySQL SELECT call found a single row', 3);
             return $this->processRowSet($result, true);
@@ -136,7 +136,9 @@ class MySQL {
     public function query($query_text) {
         // TODO: clean query text
         $result = mysql_query($query_text);
-        if (mysql_num_rows($result) == 1) {
+        if ($result == false)  {
+            return false;
+        } elseif (mysql_num_rows($result) == 1) {
             return $this->processRowSet($result, true);  
         }
         return $this->processRowSet($result);        
