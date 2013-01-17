@@ -136,8 +136,8 @@ class MySQL {
     public function query($query_text) {
         // TODO: clean query text
         $result = mysql_query($query_text);
-        if ($result == false)  {
-            return false;
+        if ($result === true || $result === false)  {
+            return $result;
         } elseif (mysql_num_rows($result) == 1) {
             return $this->processRowSet($result, true);  
         }

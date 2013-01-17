@@ -29,12 +29,12 @@ if ($results == false) {
   echo json_encode($songarray);
 } else {
   foreach($results as $row) {
-    error_log("----------- RETRIEVING SONG -----------", 3);
-    error_log("Song id: " . $row['so_id'], 3);
-    error_log("Song artist: " . $row['so_artist'], 3);
-    error_log("Song title: " . $row['so_title'], 3);
-    error_log("Song album: " . $row['so_album'], 3);  
-    error_log("Amount of votes: " . $row['stq_votes'], 3); 
+    $logger->log("----------- RETRIEVING SONG -----------", 3);
+    $logger->log("Song id: " . $row['so_id'], 3);
+    $logger->log("Song artist: " . $row['so_artist'], 3);
+    $logger->log("Song title: " . $row['so_title'], 3);
+    $logger->log("Song album: " . $row['so_album'], 3);  
+    $logger->log("Amount of votes: " . $row['stq_votes'], 3); 
      
     array_push($songarray, $row);
   }
