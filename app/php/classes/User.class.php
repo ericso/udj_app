@@ -22,7 +22,7 @@ class User {
     
     public function save($isNewUser = false) {
         // create a new database object.
-        $db = new MySQL('request', 'requestuser', 'R66teeeeeeeeeeeeeee', 'localhost');
+        $db = new MySQL('request', 'request', 'R66teeeeeeeeeeeeeee', 'localhost');
         $db->connect();
           
         // if the user is already registered and we're just updating their info.  

@@ -1,39 +1,33 @@
 <?php
-/// Find a song using search text from the Songs table ///
+// song_search_by_text.php
+// Find a song using search text from the Songs table
 
-/*** CREATE A LOG FILE ***/
-$logfile = '../../logs/songs.log';
-error_log("start\n", 3, $logfile);
+require_once(dirname(__FILE__) . '/includes/global.inc.php');
+
+$logger->log("---------------------------------", 3);
+$logger->log("start: queue_save_songs.php", 3);
+
 
 $searchText = $_GET["searchText"];
 // $escapedSearchText = sqlite_escape_string($searchText);
 $escapedSearchText = $searchText;
 
-error_log("search text: $searchText\n", 3, $logfile);
-error_log("escaped search text: $escapedSearchText\n", 3, $logfile);
-
-/*** OPEN THE DATABASE ***/
-try {
-  // Create or open the database
-  $database = new SQLite3('../../databases/request.sqlite');
-  error_log("database created\n", 3, $logfile);
-} catch(Exception $e) {
-  error_log("error: $e\n", 3, $logfile);
-  error_log("error: $error\n", 3, $logfile);
-  die ($error);
-}
+$logger->log("search text: $searchText", 3);
+$logger->log("escaped search text: $escapedSearchText", 3);
 
 /*** READ DATA FROM DATABASE ***/
 $songArray = array();
 
 /*** SEARCH THE SONGS DATABASE ***/
-$query = $database->query("SELECT * FROM Songs WHERE (so_artist LIKE '%$searchText%') OR (so_title LIKE '%$searchText%') OR (so_album LIKE '%$searchText%')");
+$results = $db->query("SELECT * FROM Songs WHERE (so_artist LIKE '%$searchText%') OR (so_title LIKE '%$searchText%') OR (so_album LIKE '%$searchText%')");
 
-while($row = $query->fetchArray()) {
-  error_log("Song id: " . $row['so_id'] . "\n", 3, $logfile);
-  error_log("Song artist: " . $row['so_artist'] . "\n", 3, $logfile);
-  error_log("Song title: " . $row['so_title'] . "\n", 3, $logfile);
-  error_log("Song album: " . $row['so_album'] . "\n", 3, $logfile);
+$logger->log('Length of song array: ' . count($results), 3);
+
+foreach($results as $row) {
+  $logger->log("Song id: " . $row['so_id'], 3);
+  $logger->log("Song title: " . $row['so_title'], 3);
+  $logger->log("Song artist: " . $row['so_artist'], 3);
+  $logger->log("Song album: " . $row['so_album'], 3);
   array_push($songArray, $row);
 }
 

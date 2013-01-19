@@ -61,7 +61,7 @@ if (isset($_POST['submit-form'])) {
         $userTools->login($username, $password);
 
         // redirect them to a welcome page
-        header("Location: welcome.php");
+        header("Location: index.php");
     }
 }
 

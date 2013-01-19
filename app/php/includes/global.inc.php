@@ -15,7 +15,7 @@ $logger = new Logger('php.log');
 // $db->connect();
 
 // connect to the MySQL database
-$db = new MySQL('request', 'requestuser', 'R66teeeeeeeeeeeeeee', 'localhost');
+$db = new MySQL('request', 'request', 'R66teeeeeeeeeeeeeee', 'localhost');
 $db->connect();
 
 // initialize UserTools object

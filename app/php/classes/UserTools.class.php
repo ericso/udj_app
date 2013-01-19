@@ -22,7 +22,7 @@ class UserTools {
         $this->logger = new Logger('php.log');
 
         // connect to the database
-        $this->db = new MySQL('request', 'requestuser', 'R66teeeeeeeeeeeeeee', 'localhost');
+        $this->db = new MySQL('request', 'request', 'R66teeeeeeeeeeeeeee', 'localhost');
         $this->db->connect();
     }
 

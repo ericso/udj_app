@@ -17,10 +17,10 @@ $djarray = array();
 // $query = $database->query("SELECT * FROM Djs");
 
 $results = $db->query("SELECT d.dj_id, d.dj_name, d.dj_email, v.ve_id, v.ve_name, q.qu_id
-                           FROM Djs AS d INNER JOIN QueueToDj AS qd
-                           ON d.dj_id = qd.qtd_djId JOIN Queues AS q
-                           ON qd.qtd_queueId = q.qu_id JOIN QueueToVenue AS qv
-                           ON qv.qtv_queueId = q.qu_id JOIN Venues AS v
+                           FROM djs AS d INNER JOIN queuetodj AS qd
+                           ON d.dj_id = qd.qtd_djId JOIN queues AS q
+                           ON qd.qtd_queueId = q.qu_id JOIN queuetovenue AS qv
+                           ON qv.qtv_queueId = q.qu_id JOIN venues AS v
                            ON qv.qtv_venueId = v.ve_id;");
 
 $logger->log('Length of DJ array: ' . count($results), 3);
