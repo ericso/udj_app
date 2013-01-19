@@ -37,7 +37,8 @@ class MySQL {
     public function processRowSet($rowSet, $singleRow=false) {
         $this->logger->log('about to process a row set', 3);
 
-        $resultArray = array();  
+        $resultArray = array();
+        $row = array();
         while ($row = mysql_fetch_assoc($rowSet)) {
             $this->logger->log('about to push a row onto the array', 3);
             array_push($resultArray, $row);

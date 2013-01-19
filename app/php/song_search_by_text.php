@@ -5,7 +5,7 @@
 require_once(dirname(__FILE__) . '/includes/global.inc.php');
 
 $logger->log("---------------------------------", 3);
-$logger->log("start: queue_save_songs.php", 3);
+$logger->log("start: song_search_by_text.php", 3);
 
 
 $searchText = $_GET["searchText"];
@@ -19,7 +19,7 @@ $logger->log("escaped search text: $escapedSearchText", 3);
 $songArray = array();
 
 /*** SEARCH THE SONGS DATABASE ***/
-$results = $db->query("SELECT * FROM Songs WHERE (so_artist LIKE '%$searchText%') OR (so_title LIKE '%$searchText%') OR (so_album LIKE '%$searchText%')");
+$results = $db->query("SELECT * FROM Songs WHERE (so_artist LIKE '%$searchText%') OR (so_title LIKE '%$searchText%') OR (so_album LIKE '%$searchText%');");
 
 $logger->log('Length of song array: ' . count($results), 3);
 

@@ -51,6 +51,8 @@ function updateSongList(foundSongs) {
 
 function addSongToQueue(songId) {
 	// Push the song onto the queue array if it isn't already there
+	alert(songId);
+	
 	if (findSongInQueue(songId)) {
 		upVote(songId);
 
