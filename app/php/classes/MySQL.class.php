@@ -9,6 +9,7 @@ class MySQL {
     protected $db_user;
     protected $db_pass;
     protected $db_host;
+    protected $db_connection;
 
     function __construct($name, $user, $pass, $host='localhost') {
         $this->db_name = $name;
@@ -17,7 +18,7 @@ class MySQL {
         $this->db_host = $host;
 
         // setup logging
-        $this->logger = new Logger('mysql.log');
+        $this->logger = new Logger('php.log');
     }
 
     //open a connection to the database. Make sure this is called  
@@ -25,10 +26,16 @@ class MySQL {
     public function connect() {
         $this->logger->log('about to make a MySQL connection', 3);
 
-        $connection = mysql_connect($this->db_host, $this->db_user, $this->db_pass);  
-        mysql_select_db($this->db_name);
-
+        $this->db_connection = new mysqli($this->db_host, $this->db_user, $this->db_pass, $this->db_name);  
+        if ($this->db_connection->connect_error) {
+            die('Connect Error (' . $connection->connect_errno . ')' . $connection->connect_error);
+        }
         return true;
+    }
+
+    public function disconnect() {
+        // close the database connection
+        $this->db_connection->close();
     }
 
     // takes a mysql row set and returns an associative array, where the keys  
@@ -39,7 +46,7 @@ class MySQL {
 
         $resultArray = array();
         $row = array();
-        while ($row = mysql_fetch_assoc($rowSet)) {
+        while ($row = $rowSet->fetch_assoc()) {
             $this->logger->log('about to push a row onto the array', 3);
             array_push($resultArray, $row);
         }
@@ -72,18 +79,18 @@ class MySQL {
         }
 
         $sql = "SELECT $columns FROM $table WHERE $where";
-        $result = mysql_query($sql);
-
-        if ($result == false) {
+        if ($result = $this->db_connection->query($sql)) {
+            // query successful
+            if ($result->num_rows == 1) {
+                $this->logger->log('MySQL SELECT call found a single row', 3);
+                return $this->processRowSet($result, true);
+            }
+            $this->logger->log('MySQL SELECT call found multiple rows', 3);
+            return $this->processRowSet($result);
+        } else {
+            // query unsuccessful
             return false;
         }
-
-        if (mysql_num_rows($result) == 1) {
-            $this->logger->log('MySQL SELECT call found a single row', 3);
-            return $this->processRowSet($result, true);
-        }
-        $this->logger->log('MySQL SELECT call found multiple rows', 3);
-        return $this->processRowSet($result);
     }
 
     // Updates a current row in the database.  
@@ -136,13 +143,30 @@ class MySQL {
     // takes a query string and executes it
     public function query($query_text) {
         // TODO: clean query text
-        $result = mysql_query($query_text);
-        if ($result === true || $result === false)  {
-            return $result;
-        } elseif (mysql_num_rows($result) == 1) {
-            return $this->processRowSet($result, true);  
+
+        $this->logger->log('About to query: ' . $query_text, 3);
+
+        if ($result = $this->db_connection->query($query_text)) {
+            // query successful
+            
+            //$this->logger->log('MySQL SELECT call query successful. Result: ' . get_class($result), 3);
+            
+            // if ($result === true || $result === false) {
+            //     // the result may come back as either true or false
+            //     $this->logger->log('MySQL SELECT call result came back as either true or false: ' . $result, 3);
+            //     return $result;
+            // } else
+
+            // if ($result->num_rows == 1) {
+            //     $this->logger->log('MySQL SELECT call found a single row', 3);
+            //     return $this->processRowSet($result, true);
+            // }
+            $this->logger->log('MySQL SELECT call found multiple rows', 3);
+            return $this->processRowSet($result);
+        } else {
+            // query unsuccessful
+            return false;
         }
-        return $this->processRowSet($result);        
     }
 }
   

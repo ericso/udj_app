@@ -20,9 +20,10 @@ $results = $db->query("SELECT s.so_id, s.so_artist, s.so_title, s.so_album, sq.s
                            ON sq.stq_queueId = q.qu_id
                            WHERE q.qu_id = '$currentQueueId';");
 
+//$logger->log('MySQL return type: ' . get_class($results), 3);
 $logger->log('Length of song array: ' . count($results), 3);
 
-// if not results, query() will return false
+// if no results, query() will return false
 // return in that case
 if ($results == false) {
   // no songs were returned

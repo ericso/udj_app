@@ -51,9 +51,10 @@ function updateSongList(foundSongs) {
 
 function addSongToQueue(songId) {
 	// Push the song onto the queue array if it isn't already there
-	alert(songId);
+	//alert('song id: ' + songId);
 	
 	if (findSongInQueue(songId)) {
+		alert('song found: ' + songId);
 		upVote(songId);
 
 		// Switch to the queue tab
@@ -120,7 +121,7 @@ function removeSongFromQueue(songId) {
 
 function upVote(songId) {
 	// Find the song by id
-	var songToUpVote = $.grep(queueSongs, function(e) { return e.so_id === songId; })[0];
+	var songToUpVote = $.grep(queueSongs, function(e) { return parseInt(e.so_id) === parseInt(songId); })[0];
 
 	// Increment the votes attribute
 	if (songToUpVote.stq_votes) {
@@ -139,7 +140,7 @@ function upVote(songId) {
 
 function downVote(songId) {
 	// Find the song by id
-	var songToDownVote = $.grep(queueSongs, function(e) { return e.so_id === songId; })[0];
+	var songToDownVote = $.grep(queueSongs, function(e) { return parseInt(e.so_id) === parseInt(songId); })[0];
 	// Decrement the votes attribute
 	if (songToDownVote.stq_votes > 1) {
 		songToDownVote.stq_votes--;
